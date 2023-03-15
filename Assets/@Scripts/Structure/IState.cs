@@ -1,4 +1,4 @@
-namespace TopDownGame.Structure
+namespace Defender.State
 {
     public interface IState
     {

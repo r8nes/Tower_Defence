@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Defender.Structure;
 
-namespace TopDownGame.Structure
+namespace Defender.State
 {
-    public class GameStateMachine : MonoBehaviour
+    public class GameStateMachine : IGameStateMachine
     {
         private readonly Dictionary<Type, IState> _states;
         private IState _activeState;
 
-        public GameStateMachine()
+        public GameStateMachine(SceneLoader sceneLoader)
         {
             _states = new Dictionary<Type, IState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this)
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader)
             };
         }
 
@@ -24,5 +24,10 @@ namespace TopDownGame.Structure
             _activeState = state;
             state.Enter();
         }
+    }
+
+    public interface IGameStateMachine
+    {
+        void Enter<TState>() where TState : IState;
     }
 }
