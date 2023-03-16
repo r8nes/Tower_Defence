@@ -1,4 +1,5 @@
 using Defender.Assets;
+using Defender.Data.Static;
 using Defender.Factory;
 using Defender.Service;
 using Defender.System;
@@ -32,7 +33,12 @@ namespace Defender.State
         private void RegisterService()
         {
             _services.RegisterSingle<IAssetsProvider>(new AssetsProvider());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetsProvider>()));
+           
+            _services.RegisterSingle<IGameFactory>(
+                new GameFactory(
+                _services.Single<IAssetsProvider>(),
+                 _services.Single<IStaticDataService>(),
+                _services.Single<IRandomService>()));
         }
     }
 }

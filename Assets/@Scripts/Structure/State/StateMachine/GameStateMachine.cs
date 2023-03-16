@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Defender.Data.Static;
 using Defender.Factory;
 using Defender.Service;
 using Defender.System;
@@ -23,7 +24,8 @@ namespace Defender.State
                 [typeof(LoadLevelState)] = new LoadLevelState(this, 
                 sceneLoader, 
                 loadingUi,
-                services.Single<IGameFactory>()),
+                services.Single<IGameFactory>(),
+                services.Single<IStaticDataService>()),
 
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };
