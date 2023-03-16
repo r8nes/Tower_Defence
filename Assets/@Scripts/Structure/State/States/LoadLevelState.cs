@@ -2,7 +2,7 @@
 
 namespace Defender.State
 {
-    public class LoadLevelState : IState
+    public class LoadLevelState : IPayLoadState<string>
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;

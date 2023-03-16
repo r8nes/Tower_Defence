@@ -20,20 +20,27 @@ namespace Defender.State
 
         public void Enter<TState>() where TState : class, IState
         {
-            _activeState?.Exit();
-            IState state = GetState<TState>();
-            _activeState = state;
+            IState state = ChangeState<TState>();
             state.Enter();
         }
 
-        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState : class, IPayLoadState<TPayLoad>
+        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState : 
+            class, IPayLoadState<TPayLoad>
         {
-            _activeState?.Exit();
-            IPayLoadState<TPayLoad> state = (IPayLoadState<TPayLoad>)GetState<TState>();
-            _activeState = state;
+            TState state = ChangeState<TState>();
             state.Enter(payLoad);
         }
 
-        private IState GetState<TState>() where TState : class, IExitableState => (IState)(_states[typeof(TState)] as TState);
+        private TState ChangeState<TState>() where TState :
+            class, IExitableState
+        {
+            _activeState?.Exit();
+
+            TState state = GetState<TState>();
+            _activeState = state;
+            return state;
+        }
+
+        private TState GetState<TState>() where TState : class, IExitableState => _states[typeof(TState)] as TState;
     }
 }

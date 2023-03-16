@@ -4,7 +4,8 @@ namespace Defender.State
 {
     public class BootstrapState : IState
     {
-        private const string Initial = "Initial";
+        private const string INITIAL_SCENE = "Initial";
+        private const string MAIN_SCENE = "Main";
 
         private SceneLoader _sceneLoader;
         private GameStateMachine _stateMachine;
@@ -18,12 +19,10 @@ namespace Defender.State
         public void Enter()
         {
             RegisterService();
-            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+            _sceneLoader.Load(INITIAL_SCENE, onLoaded: EnterLoadLevel);
         }
 
-        private void EnterLoadLevel()
-        {
-        }
+        private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>(MAIN_SCENE);
 
         private void RegisterService()
         {
