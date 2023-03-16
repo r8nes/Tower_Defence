@@ -1,4 +1,5 @@
-﻿using Defender.State;
+﻿using Defender.Service;
+using Defender.State;
 
 namespace Defender.System
 {
@@ -8,7 +9,7 @@ namespace Defender.System
 
         public Game(ICoroutineRunner coroutineRunner, LoadingUI loadingUi)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingUi);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingUi, AllServices.Container);
         }
     }
 }

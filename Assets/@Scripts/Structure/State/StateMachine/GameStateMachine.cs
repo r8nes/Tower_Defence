@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Defender.Factory;
+using Defender.Service;
 using Defender.System;
 
 namespace Defender.State
@@ -7,14 +9,22 @@ namespace Defender.State
     public class GameStateMachine : IGameStateMachine
     {
         private IExitableState _activeState;
+
         private readonly Dictionary<Type, IExitableState> _states;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingUI loadingUi)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingUI loadingUi, AllServices services)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingUi),
+                [typeof(BootstrapState)] = new BootstrapState(this,
+                sceneLoader, 
+                services),
+
+                [typeof(LoadLevelState)] = new LoadLevelState(this, 
+                sceneLoader, 
+                loadingUi,
+                services.Single<IGameFactory>()),
+
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };
         }
