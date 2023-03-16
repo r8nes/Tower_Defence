@@ -1,7 +1,7 @@
 using Defender.State;
 using UnityEngine;
 
-namespace Defender.Structure
+namespace Defender.System
 {
     public class Bootstrap : MonoBehaviour, ICoroutineRunner
     {

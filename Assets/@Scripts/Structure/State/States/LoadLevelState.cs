@@ -1,4 +1,4 @@
-﻿using Defender.Structure;
+﻿using Defender.System;
 
 namespace Defender.State
 {
@@ -16,8 +16,8 @@ namespace Defender.State
         //HACK
         public void Enter(string sceneName) => _sceneLoader.Load(sceneName);
 
-        public void Enter() {}
+        public void Enter() { }
 
-        public void Exit() {}
+        public void Exit() { }
     }
 }

@@ -1,4 +1,4 @@
-using Defender.Structure;
+using Defender.System;
 
 namespace Defender.State
 {

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Defender.Structure
+namespace Defender.System
 {
     public class SceneLoader
     {

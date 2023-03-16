@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Defender.Structure
+namespace Defender.System
 {
     public interface ICoroutineRunner
     {

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Defender.Structure;
+using Defender.System;
 
 namespace Defender.State
 {

@@ -1,6 +1,6 @@
 ﻿using Defender.State;
 
-namespace Defender.Structure
+namespace Defender.System
 {
     public class Game
     {
