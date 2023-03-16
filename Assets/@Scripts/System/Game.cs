@@ -6,9 +6,9 @@ namespace Defender.System
     {
         public GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner)
+        public Game(ICoroutineRunner coroutineRunner, LoadingUI loadingUi)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner));
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingUi);
         }
     }
 }

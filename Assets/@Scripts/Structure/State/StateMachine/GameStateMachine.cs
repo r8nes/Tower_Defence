@@ -9,12 +9,13 @@ namespace Defender.State
         private IExitableState _activeState;
         private readonly Dictionary<Type, IExitableState> _states;
 
-        public GameStateMachine(SceneLoader sceneLoader)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingUI loadingUi)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader)
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingUi),
+                [typeof(GameLoopState)] = new GameLoopState(this)
             };
         }
 
@@ -24,7 +25,7 @@ namespace Defender.State
             state.Enter();
         }
 
-        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState : 
+        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState :
             class, IPayLoadState<TPayLoad>
         {
             TState state = ChangeState<TState>();
@@ -38,6 +39,7 @@ namespace Defender.State
 
             TState state = GetState<TState>();
             _activeState = state;
+
             return state;
         }
 

@@ -1,14 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Defender.Logic
+namespace Defender.System
 {
     public class LoadingUI : MonoBehaviour
     {
+        public float CanvasFadeSpeed = 0.03f;
+
         public CanvasGroup CanvasGroup;
 
         private void Awake()
-        {
+        {   
             DontDestroyOnLoad(this);
         }
 
@@ -27,7 +29,7 @@ namespace Defender.Logic
         {
             while (CanvasGroup.alpha > 0)
             {
-                CanvasGroup.alpha -= 0.03f;
+                CanvasGroup.alpha -= CanvasFadeSpeed;
                 yield return new WaitForSeconds(0.03f);
             }
 
