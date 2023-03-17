@@ -15,10 +15,5 @@ namespace Defender.Entity
         {
             Attack.EnableAttack(collision);
         }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            Attack.DisableAttack();
-        }
     }
 }

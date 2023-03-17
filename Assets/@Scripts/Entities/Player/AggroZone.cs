@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Defender.Entity
@@ -11,7 +10,6 @@ namespace Defender.Entity
         public PlayerAttack PlayerAttack;
         public CircleCollider2D CircleCollider;
 
-        private List<EnemyHealth> Enemies = new List<EnemyHealth>();
         private LineRenderer _lineRenderer;
         private Color color = Color.white;
 
@@ -29,8 +27,6 @@ namespace Defender.Entity
             }
 
             _lineRenderer.SetPositions(positions);
-
-            PlayerAttack.DisableAttack();
         }
 
         private void SetupLineRenderer()

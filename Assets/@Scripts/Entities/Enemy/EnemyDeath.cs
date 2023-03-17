@@ -27,11 +27,10 @@ namespace Defender.Entity
 
         public void Die()
         {
-            Health.HealthChanged -= OnHealthChanged;
-
             SpawnDeathEffect();
             DeathHappend?.Invoke();
-            StartCoroutine(DestroyTimer());
+
+            Destroy(gameObject);
         }
 
         private void OnHealthChanged()
@@ -43,11 +42,5 @@ namespace Defender.Entity
         }
 
         private void SpawnDeathEffect() => Instantiate(DeathFX, transform.position, Quaternion.identity);
-
-        private IEnumerator DestroyTimer()
-        {
-            yield return new WaitForSeconds(0.3f);
-            Destroy(gameObject);
-        }
     }
 }

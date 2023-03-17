@@ -148,7 +148,6 @@ MonoBehaviour:
   Segments: 32
   PlayerAttack: {fileID: -5226984144288898110}
   CircleCollider: {fileID: 1161993690657264211}
-  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!58 &1161993690657264211
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -268,3 +267,4 @@ MonoBehaviour:
     DamageRadius: 6
     BulletSpeed: 6
     FireRate: 1
+  Ammo: {fileID: 6471156048066443811, guid: df6b6f8977313d04e87c3a1b82912ecd, type: 3}

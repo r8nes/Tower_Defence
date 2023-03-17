@@ -1,7 +1,5 @@
 using Defender.Assets;
-using Defender.Data.Static;
 using Defender.Factory;
-using Defender.Logic;
 using Defender.Service;
 using Defender.System;
 
@@ -39,7 +37,6 @@ namespace Defender.State
             RegisterGameFactory();
             RegisterSaveLoadService();
         }
-
 
         private void RegisterAssetProvider()
         {
