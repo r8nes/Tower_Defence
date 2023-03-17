@@ -13,10 +13,8 @@ namespace Defender.Logic
         public EnemyTypeId MonsterTypeId;
 
         private float _spawnStep = 2f;
-        private int _waveCount = 30;
 
         private IGameFactory _factory;
-        private EnemyDeath _enemyDeath;
 
         public void Construct(IGameFactory factory)
         {
@@ -28,7 +26,12 @@ namespace Defender.Logic
             _factory.CreateEnemy(MonsterTypeId, transform);
         }
 
-        public IEnumerator StartWave() 
+        public void StartSpawn() 
+        {
+            StartCoroutine(StartWave());
+        }
+
+        private IEnumerator StartWave() 
         {
             yield return new WaitForSeconds(_spawnStep);
             Spawn();

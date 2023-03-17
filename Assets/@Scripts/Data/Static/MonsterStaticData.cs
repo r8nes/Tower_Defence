@@ -10,7 +10,7 @@ namespace Defender.Data.Static
         [Range(0, 100)] public int Hp = 10;
 
         [Header("Attack Setting")]
-        [Range(1f, 10f)] public float Speed = 3f;
+        [Range(0.1f, 10f)] public float Speed = 3f;
 
         [Header("Loot Setting")]
         public int MinLoot;

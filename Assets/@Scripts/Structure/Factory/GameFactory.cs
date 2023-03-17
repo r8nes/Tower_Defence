@@ -37,15 +37,15 @@ namespace Defender.Factory
             health.Current = monsterData.Hp;
             health.Max = monsterData.Hp;
 
-            monster.GetComponent<EnemyMovement>().Construct(PlayerGameObject.transform);
+            monster.GetComponent<EnemyMovement>().Construct(PlayerGameObject.transform, monsterData.Speed);
 
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
 
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
             lootSpawner.Construct(this, _random);
 
-            if (monster.TryGetComponent(out EnemyMovement movement))
-                movement.Construct(PlayerGameObject.transform);
+            //if (monster.TryGetComponent(out EnemyMovement movement))
+            //    movement.Construct(PlayerGameObject.transform, monsterData.Speed);
 
             return monster;
         }
@@ -58,6 +58,8 @@ namespace Defender.Factory
             spawner.Construct(this);
             spawner.Id = spawnerId;
             spawner.MonsterTypeId = monsterTypeId;
+
+            spawner.StartSpawn();
         }
 
         public LootPiece CreateLoot()

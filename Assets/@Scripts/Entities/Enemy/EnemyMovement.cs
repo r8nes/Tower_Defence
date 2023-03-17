@@ -5,13 +5,14 @@ namespace Defender.Entity
     public class EnemyMovement : MonoBehaviour
     {
         private const float _minDistance = 0.1f;
-        private float _speed;
+        private float _speed = 0.5f;
 
         private Transform _playerTransform;
 
-        public void Construct(Transform playerTransform)
+        public void Construct(Transform playerTransform, float speed)
         {
             _playerTransform = playerTransform;
+            _speed = speed;
         }
 
         public bool IsReachPlayer() => Vector3.Distance(transform.position, _playerTransform.position) >= _minDistance;
