@@ -11,18 +11,20 @@ namespace Defender.State
     {
         private readonly IGameFactory _gameFactory;
         private readonly IStaticDataService _dataService;
+        private readonly IProgressService _progressService;
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingUI _loadingUI;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI, IGameFactory gameFactory, IStaticDataService dataService)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI, IGameFactory gameFactory, IStaticDataService dataService, IProgressService progressService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingUI = loadingUI;
             _gameFactory = gameFactory;
             _dataService = dataService;
+            _progressService = progressService;
         }
 
         public void Enter(string sceneName)

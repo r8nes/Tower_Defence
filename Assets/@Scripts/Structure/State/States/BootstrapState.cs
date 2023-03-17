@@ -8,7 +8,6 @@ namespace Defender.State
     public class BootstrapState : IState
     {
         private const string INITIAL_SCENE = "Initial";
-        private const string MAIN_SCENE = "Main";
 
         private readonly AllServices _services;
         private readonly SceneLoader _sceneLoader;
@@ -27,16 +26,19 @@ namespace Defender.State
 
         public void Exit() { }
 
-        private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>(MAIN_SCENE);
+        private void EnterLoadLevel() => _stateMachine.Enter<LoadProgressState>();
 
         private void RegisterService()
         {
             RegisterAssetProvider();
             RegisterStaticData();
             RegisterProgressService();
+            RegisterRandomService();
             RegisterGameFactory();
             RegisterSaveLoadService();
         }
+
+        #region Register
 
         private void RegisterAssetProvider()
         {
@@ -55,7 +57,12 @@ namespace Defender.State
         {
             _services.RegisterSingle<IProgressService>(new ProgressService());
         }
-        
+
+        private void RegisterRandomService() 
+        {
+            _services.RegisterSingle<IRandomService>(new RandomService());
+        }
+
         private void RegisterGameFactory()
         {
             _services.RegisterSingle<IGameFactory>(
@@ -72,5 +79,7 @@ namespace Defender.State
                 new SaveLoadService(_services.Single<IProgressService>(),
                 _services.Single<IGameFactory>()));
         }
+
+        #endregion
     }
 }

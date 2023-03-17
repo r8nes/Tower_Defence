@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Defender.Data.Static;
 using Defender.Factory;
 using Defender.Service;
 using Defender.System;
@@ -17,15 +16,23 @@ namespace Defender.State
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this,
+                [typeof(BootstrapState)] = new BootstrapState(
+                this,
                 sceneLoader, 
                 services),
 
-                [typeof(LoadLevelState)] = new LoadLevelState(this, 
+                [typeof(LoadLevelState)] = new LoadLevelState(
+                this,
                 sceneLoader, 
                 loadingUi,
                 services.Single<IGameFactory>(),
-                services.Single<IStaticDataService>()),
+                services.Single<IStaticDataService>(),
+                services.Single<IProgressService>()),
+
+                [typeof(LoadProgressState)] = new LoadProgressState(
+                this,
+                services.Single<IProgressService>(),
+                services.Single<ISaveLoadService>()),
 
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };

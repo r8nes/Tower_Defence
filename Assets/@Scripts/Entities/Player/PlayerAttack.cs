@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Defender.Data;
 using Defender.Service;
-using Defender.Utility;
 using UnityEngine;
 
 namespace Defender.Entity
@@ -11,7 +10,7 @@ namespace Defender.Entity
         private float _time;
         private bool _attackIsActive;
 
-        private Queue<GameObject> Enemies = new Queue<GameObject>();
+        private Queue<EnemyDeath> Enemies = new Queue<EnemyDeath>();
 
         public PlayerAttackData AttackStats;
         public GameObject Ammo;
@@ -36,9 +35,9 @@ namespace Defender.Entity
         {
             if (Enemies.Count > 0)
             {
-                var projectile = Instantiate(Ammo, transform);
+                GameObject projectile = Instantiate(Ammo, transform);
 
-                if (projectile != null )
+                if (projectile != null)
                 {
                     projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
@@ -53,16 +52,12 @@ namespace Defender.Entity
 
         public void EnableAttack(Collider2D enemy)
         {
-
-            GameObject enemyGameObject = enemy.gameObject;
-
-            var enemyDeathComponent = enemy.GetComponent<EnemyDeath>();
-            enemyDeathComponent.DeathHappend += DisableAttack;
-
-            Enemies.Enqueue(enemyGameObject);
-            Debug.Log(Enemies.Count);
-
-            _attackIsActive = true;
+            if (TryGetComponent(out EnemyDeath enemyDeathComponent))
+            {
+                enemyDeathComponent.DeathHappend += DisableAttack;
+                Enemies.Enqueue(enemyDeathComponent);
+                _attackIsActive = true;
+            }
         }
 
         public void DisableAttack()

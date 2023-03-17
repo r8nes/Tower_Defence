@@ -5,17 +5,14 @@ using UnityEngine;
 
 namespace Defender.Utility
 {
-
     public class ObjectPooler : MonoBehaviour
     {
         public static ObjectPooler SharedInstance;
+
         public List<ObjectPoolItem> ItemsToPool;
         public List<GameObject> PooledObjects;
 
-        void Awake()
-        {
-            SharedInstance = this;
-        }
+        void Awake() => SharedInstance = this;
 
         void Start()
         {

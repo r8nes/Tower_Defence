@@ -1,53 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2826241549475376278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1233058036635016822}
-  - component: {fileID: 2201358661604116917}
-  m_Layer: 0
-  m_Name: Loot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1233058036635016822
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2826241549475376278}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5590258829812221414}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2201358661604116917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2826241549475376278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caa721bd7d34d64bb229fc8593f5068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Loot: {fileID: 0}
-  PickupFixPrefab: {fileID: 0}
-  LootText: {fileID: 0}
-  PickupPopup: {fileID: 0}
 --- !u!1 &6877398693708334891
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,8 +15,7 @@ GameObject:
   - component: {fileID: 7598543757874385790}
   - component: {fileID: -6173657266178539624}
   - component: {fileID: -6849653078589822329}
-  - component: {fileID: 8767547325075602036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -84,7 +35,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7437022780882245803}
-  - {fileID: 1233058036635016822}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -228,19 +178,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8767547325075602036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6877398693708334891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43b678884a8b35a43a658fdfdeee79e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: Enemy + 180c9a60-9469-49ec-bc4b-6715806e79c9
 --- !u!1 &8823048566698373690
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7437022780882245803}
   - component: {fileID: 5294368503782853323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LootSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

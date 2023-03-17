@@ -5,12 +5,12 @@ namespace Defender.Logic
 {
     public class LootPiece : MonoBehaviour
     {
-        public TextMeshPro LootText;
+        private const float DelayBeforeDestroying = 0.2f;
+
+        public TextMeshProUGUI LootText;
 
         private Loot _loot;
         private WorldData _worldData;
-
-        private const float DelayBeforeDestroying = 0.2f;
 
         private void Start()
         {

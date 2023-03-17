@@ -19,7 +19,6 @@ namespace Defender.Factory
         private GameObject PlayerGameObject { get; set; }
 
         public List<ISavedProgressReader> ProgressReader => new List<ISavedProgressReader>();
-
         public List<ISavedProgress> ProgressWriters => new List<ISavedProgress>();
 
         public GameFactory(IAssetsProvider assets, IStaticDataService staticData, IRandomService random, IProgressService progressService)
@@ -28,6 +27,14 @@ namespace Defender.Factory
             _staticData = staticData;
             _random = random;
             _progressService = progressService;
+        }
+
+        public void Register(ISavedProgressReader reader)
+        {
+            if (reader is ISavedProgress writer)
+                ProgressWriters.Add(writer);
+
+            ProgressReader.Add(reader);
         }
 
         public void CreateHud() => _assets.Instantiate(AssetsPath.GLOBAL_HUD_PATH);
