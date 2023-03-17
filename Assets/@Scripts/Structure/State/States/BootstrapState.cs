@@ -35,17 +35,11 @@ namespace Defender.State
         {
             RegisterAssetProvider();
             RegisterStaticData();
+            RegisterProgressService();
             RegisterGameFactory();
+            RegisterSaveLoadService();
         }
 
-        private void RegisterGameFactory()
-        {
-            _services.RegisterSingle<IGameFactory>(
-                            new GameFactory(
-                            _services.Single<IAssetsProvider>(),
-                            _services.Single<IStaticDataService>(),
-                            _services.Single<IRandomService>()));
-        }
 
         private void RegisterAssetProvider()
         {
@@ -58,6 +52,28 @@ namespace Defender.State
             IStaticDataService staticData = new StaticDataService();
             staticData.LoadMonsters();
             _services.RegisterSingle(staticData);
+        }
+        
+        private void RegisterProgressService() 
+        {
+            _services.RegisterSingle<IProgressService>(new ProgressService());
+        }
+        
+        private void RegisterGameFactory()
+        {
+            _services.RegisterSingle<IGameFactory>(
+                            new GameFactory(
+                            _services.Single<IAssetsProvider>(),
+                            _services.Single<IStaticDataService>(),
+                            _services.Single<IRandomService>(),
+                            _services.Single<IProgressService>()));
+        }
+
+        private void RegisterSaveLoadService() 
+        {
+            _services.RegisterSingle<ISaveLoadService>(
+                new SaveLoadService(_services.Single<IProgressService>(),
+                _services.Single<IGameFactory>()));
         }
     }
 }

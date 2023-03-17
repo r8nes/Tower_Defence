@@ -1,4 +1,5 @@
-﻿using Defender.Assets;
+﻿using System.Collections.Generic;
+using Defender.Assets;
 using Defender.Data.Static;
 using Defender.Entity;
 using Defender.Logic;
@@ -12,14 +13,20 @@ namespace Defender.Factory
         private readonly IRandomService _random;
         private readonly IAssetsProvider _assets;
         private readonly IStaticDataService _staticData;
+        private readonly IProgressService _progressService;
 
         private GameObject PlayerGameObject { get; set; }
 
-        public GameFactory(IAssetsProvider assets, IStaticDataService staticData, IRandomService random)
+        public List<ISavedProgressReader> ProgressReader => new List<ISavedProgressReader>();
+
+        public List<ISavedProgress> ProgressWriters => new List<ISavedProgress>();
+
+        public GameFactory(IAssetsProvider assets, IStaticDataService staticData, IRandomService random, IProgressService progressService)
         {
             _assets = assets;
             _staticData = staticData;
             _random = random;
+            _progressService = progressService;
         }
 
         public void CreateHud() => _assets.Instantiate(AssetsPath.GLOBAL_HUD_PATH);
@@ -44,9 +51,6 @@ namespace Defender.Factory
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
             lootSpawner.Construct(this, _random);
 
-            //if (monster.TryGetComponent(out EnemyMovement movement))
-            //    movement.Construct(PlayerGameObject.transform, monsterData.Speed);
-
             return monster;
         }
 
@@ -67,7 +71,7 @@ namespace Defender.Factory
             LootPiece loot = _assets.Instantiate(AssetsPath.LOOT_PATH)
                 .GetComponent<LootPiece>();
 
-            //loot.Construct();
+            loot.Construct(_progressService.Progress.WorldData);
 
             return loot;
         }

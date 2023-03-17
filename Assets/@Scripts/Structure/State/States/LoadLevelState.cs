@@ -1,6 +1,5 @@
 ﻿using Defender.Data.Static;
 using Defender.Factory;
-using Defender.Logic;
 using Defender.Service;
 using Defender.System;
 using UnityEngine;
@@ -16,8 +15,6 @@ namespace Defender.State
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingUI _loadingUI;
-
-        private WorldData _worldData;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI, IGameFactory gameFactory, IStaticDataService dataService)
         {
@@ -50,8 +47,6 @@ namespace Defender.State
 
         private void InitGameWrold()
         {
-            InitWorldData();
-
             LevelStaticData levelData = GetLevelStaticData();
 
             InitSpawners(levelData);
@@ -78,11 +73,6 @@ namespace Defender.State
         }
 
         private GameObject InitPlayer(LevelStaticData levelData) => _gameFactory.CreatePlayer(levelData.InitialHeroPosition);
-
-        private void InitWorldData() 
-        {
-            _worldData = new WorldData();
-        }
 
         #endregion
 
