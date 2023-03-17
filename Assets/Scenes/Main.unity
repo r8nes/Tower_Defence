@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemsToPool:
-  - ObjectToPool: {fileID: 6471156048066443811, guid: df6b6f8977313d04e87c3a1b82912ecd, type: 3}
-    AmountToPool: 10
+  - ObjectToPool: {fileID: 0}
+    AmountToPool: 0
     ShouldExpand: 0
   PooledObjects: []
 --- !u!4 &1247876573

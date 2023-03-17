@@ -4,13 +4,10 @@ namespace Defender.Entity
 {
     public class Ammo : MonoBehaviour, IAmmo
     {
-
-        private int _damage = 5;
-        private float _speed = 5f;
-
+        private int _damage;
+        private float _speed;
         private float _distance;
-        private float _startTime;
-
+  
         public Vector2 _startPosition;
         public Vector2 _targetPosition;
 
@@ -23,8 +20,7 @@ namespace Defender.Entity
 
         private void Update()
         {
-            float timeInterval = Time.time - _startTime;
-            gameObject.transform.position = Vector3.Lerp(transform.position, _targetPosition, timeInterval * _speed / _distance);
+            gameObject.transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime *_speed / _distance);
         }
 
         public void Construct(float speed, int damage, Vector2 target)
@@ -40,7 +36,8 @@ namespace Defender.Entity
             {
                 health.TakeDamage(_damage);
             }
-            gameObject.SetActive(false);
+
+            Destroy(gameObject);
         }
     }
 }

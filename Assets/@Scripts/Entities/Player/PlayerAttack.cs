@@ -52,10 +52,11 @@ namespace Defender.Entity
 
         public void EnableAttack(Collider2D enemy)
         {
-            if (TryGetComponent(out EnemyDeath enemyDeathComponent))
+            if (enemy.TryGetComponent(out EnemyDeath enemyDeathComponent))
             {
                 enemyDeathComponent.DeathHappend += DisableAttack;
                 Enemies.Enqueue(enemyDeathComponent);
+                Debug.Log(Enemies.Count);
                 _attackIsActive = true;
             }
         }
