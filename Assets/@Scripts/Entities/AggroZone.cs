@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Defender.Entity
@@ -6,15 +7,17 @@ namespace Defender.Entity
     public class AggroZone : MonoBehaviour
     {
         public int Segments = 32;
-        public PlayerAttack PlayerStats;
-        
-        private LineRenderer _lineRenderer;
 
-        public Color color = Color.white;
+        public PlayerAttack PlayerAttack;
+        public CircleCollider2D CircleCollider;
+
+        private List<EnemyHealth> Enemies = new List<EnemyHealth>();
+        private LineRenderer _lineRenderer;
+        private Color color = Color.white;
 
         private void Start()
         {
-            var radius = PlayerStats.AttackStats.DamageRadius;
+            var radius = PlayerAttack.AttackStats.DamageRadius;
 
             SetupLineRenderer();
             SetCirclePosition(out Vector3[] positions, out float angle, out float angleStep);
@@ -26,6 +29,8 @@ namespace Defender.Entity
             }
 
             _lineRenderer.SetPositions(positions);
+
+            PlayerAttack.DisableAttack();
         }
 
         private void SetupLineRenderer()
@@ -44,6 +49,11 @@ namespace Defender.Entity
             positions = new Vector3[Segments + 1];
             angle = 0f;
             angleStep = 2f * Mathf.PI / Segments;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            PlayerAttack.EnableAttack(collision);
         }
     }
 }

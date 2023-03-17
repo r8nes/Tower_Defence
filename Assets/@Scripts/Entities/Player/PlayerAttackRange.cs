@@ -5,24 +5,20 @@ namespace Defender.Entity
     public class PlayerAttackRange : MonoBehaviour
     {
         public PlayerAttack Attack;
-        public TriggerObserver TriggerObserver;
 
         private void Start()
         {
-            TriggerObserver.TriggerEnter += TriggerEnter;
-            TriggerObserver.TriggerExit += TriggerExit;
-
             Attack.DisableAttack();
         }
 
-        private void TriggerExit(Collider obj)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            Attack.DisableAttack();
+            Attack.EnableAttack(collision);
         }
 
-        private void TriggerEnter(Collider obj)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            Attack.EnableAttack();
+            Attack.DisableAttack();
         }
     }
 }

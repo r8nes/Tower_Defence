@@ -3,7 +3,7 @@
 namespace Defender.Data.Static
 {
     [CreateAssetMenu(fileName = "MonsterData", menuName = "StaticData/Monsters")]
-    public class MonsterStaticData : ScriptableObject
+    public class MonsterStaticData : BaseStaticData
     {
         public EnemyTypeId MonsterTypeId;
 

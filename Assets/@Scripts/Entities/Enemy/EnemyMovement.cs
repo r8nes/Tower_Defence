@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Defender.Entity
 {
@@ -8,6 +9,8 @@ namespace Defender.Entity
         private float _speed = 0.5f;
 
         private Transform _playerTransform;
+
+        public event Action OnPlayerTriggered;
 
         public void Construct(Transform playerTransform, float speed)
         {
@@ -22,6 +25,10 @@ namespace Defender.Entity
             if (_playerTransform && IsReachPlayer())
             {
                 transform.position = Vector2.MoveTowards(transform.position, _playerTransform.transform.position, _speed * Time.deltaTime);
+            }
+            else
+            {
+                OnPlayerTriggered?.Invoke();
             }
         }
     }

@@ -6,20 +6,22 @@ namespace Defender.Entity
     {
         private Rigidbody2D objectRigidbody;
         
-        public int Damage = 5;
-        public float Speed = 5f;
+        private int _damage = 5;
+        private float _speed = 5f;
 
-        public void Construct(float speed,int damage) 
+        public Transform EnemyTransform { get; set; }
+
+        public void Construct(float speed, int damage) 
         {
-            Speed = speed;
-            Damage = damage;
+            _speed = speed;
+            _damage = damage;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent(out IHealth health))
             {
-                health.TakeDamage(2f);
+                health.TakeDamage(_damage);
             }
             gameObject.SetActive(false);
         }
@@ -27,7 +29,11 @@ namespace Defender.Entity
         private void OnEnable()
         {
             objectRigidbody = transform.GetComponent<Rigidbody2D>();
-            objectRigidbody.velocity = transform.up * Speed;
+
+            if (EnemyTransform != null)
+            {
+                objectRigidbody.velocity = EnemyTransform.position * _speed;
+            }
         }
     }
 }

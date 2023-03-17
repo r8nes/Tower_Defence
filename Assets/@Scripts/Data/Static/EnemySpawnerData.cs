@@ -7,6 +7,7 @@ namespace Defender.Data.Static
     public class EnemySpawnerData
     {
         public string Id;
+
         public EnemyTypeId MonsterTypeId;
         public Vector2 Position;
 

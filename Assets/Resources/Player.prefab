@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4133678389580001201}
   - component: {fileID: 4023599568059521845}
   - component: {fileID: 6206962307222876865}
+  - component: {fileID: 1161993690657264211}
   m_Layer: 0
   m_Name: AlarmCircle
   m_TagString: Untagged
@@ -145,8 +146,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Segments: 32
-  PlayerStats: {fileID: -5226984144288898110}
+  PlayerAttack: {fileID: -5226984144288898110}
+  CircleCollider: {fileID: 1161993690657264211}
   color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!58 &1161993690657264211
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425620153118781075}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!1 &4677408884255278479
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,3 +266,5 @@ MonoBehaviour:
   AttackStats:
     Damage: 3
     DamageRadius: 6
+    BulletSpeed: 6
+    FireRate: 1

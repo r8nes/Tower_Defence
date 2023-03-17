@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Defender.Data;
 using Defender.Service;
 using Defender.Utility;
@@ -8,35 +8,61 @@ namespace Defender.Entity
 {
     public class PlayerAttack : MonoBehaviour, ISavedProgressReader
     {
+        private float _time;
         private bool _attackIsActive;
+
+        private List<EnemyHealth> Enemies = new List<EnemyHealth>();
 
         public PlayerAttackData AttackStats;
 
         private void Update()
         {
-            if (_attackIsActive)
+            _time += Time.deltaTime;
+
+            float nextTimeToFire = 1 / AttackStats.FireRate;
+
+            if (_time >= nextTimeToFire)
             {
-                PlayAttack();
+                if (_attackIsActive)
+                {
+                    PlayAttack();
+                    _time = 0;
+                }
             }
         }
 
         private void PlayAttack()
         {
-            GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject();
-            
-            if (bullet != null)
-            {
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
+            GameObject projectile = ObjectPooler.SharedInstance.GetPooledObject();
 
-                bullet.GetComponent<Ammo>().Construct(AttackStats.Damage);
-                bullet.SetActive(true);
+            if (projectile != null && Enemies.Count > 0)
+            {
+                projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+                var ammo = projectile.GetComponent<Ammo>();
+                ammo.Construct(AttackStats.BulletSpeed, AttackStats.Damage);
+                ammo.EnemyTransform = Enemies[0].transform;
+
+                projectile.SetActive(true);
             }
         }
 
-        public void EnableAttack() => _attackIsActive = true;
+        public void EnableAttack(Collider2D enemy)
+        {
+            var objectToFire = enemy.GetComponent<EnemyHealth>();
+            Enemies.Add(objectToFire);
 
-        public void DisableAttack() => _attackIsActive = false;
+            _attackIsActive = true;
+        }
+
+        public void DisableAttack()
+        {
+            if (Enemies.Count > 0)
+            {
+                Enemies.RemoveAt(0);
+            }
+            _attackIsActive = false;
+        }
 
         public void LoadProgress(PlayerProgress progress) => AttackStats = progress.PlayerDamageData;
     }

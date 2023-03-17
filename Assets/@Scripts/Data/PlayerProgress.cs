@@ -7,13 +7,14 @@ namespace Defender.Data
     public class PlayerProgress
     {
         public WorldData WorldData;
-        public PlayerHealthData HealthData;
+        public PlayerHealthData PlayerHealthData;
         public PlayerAttackData PlayerDamageData;
 
         public PlayerProgress()
         {
             WorldData = new WorldData();
-            HealthData = new PlayerHealthData();
+            PlayerHealthData = new PlayerHealthData();
+            PlayerDamageData = new PlayerAttackData();
         }
     }
 }

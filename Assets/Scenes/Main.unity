@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   WaveCount: 10
-  WaveDelay: 1
+  WaveDelay: 2.5
 --- !u!4 &256826017
 Transform:
   m_ObjectHideFlags: 0
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   WaveCount: 10
-  WaveDelay: 1
+  WaveDelay: 0.4
 --- !u!4 &750770465
 Transform:
   m_ObjectHideFlags: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   WaveCount: 10
-  WaveDelay: 1
+  WaveDelay: 0.7
 --- !u!4 &1068717280
 Transform:
   m_ObjectHideFlags: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   WaveCount: 10
-  WaveDelay: 1
+  WaveDelay: 2
 --- !u!4 &1440513088
 Transform:
   m_ObjectHideFlags: 0
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   WaveCount: 10
-  WaveDelay: 1
+  WaveDelay: 4
 --- !u!4 &1600621708
 Transform:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   WaveCount: 10
-  WaveDelay: 1
+  WaveDelay: 0.1
 --- !u!4 &1805176705
 Transform:
   m_ObjectHideFlags: 0
