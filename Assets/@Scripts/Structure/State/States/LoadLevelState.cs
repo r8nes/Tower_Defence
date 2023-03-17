@@ -1,21 +1,23 @@
 ﻿using Defender.Data.Static;
 using Defender.Factory;
+using Defender.Logic;
+using Defender.Service;
 using Defender.System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Defender.State
 {
     public class LoadLevelState : IPayLoadState<string>
     {
-        private const string INITIAL_POINT = "InitialPoint";
-
         private readonly IGameFactory _gameFactory;
         private readonly IStaticDataService _dataService;
-
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingUI _loadingUI;
+
+        private WorldData _worldData;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI, IGameFactory gameFactory, IStaticDataService dataService)
         {
@@ -44,10 +46,52 @@ namespace Defender.State
             _gameStateMachine.Enter<GameLoopState>();
         }
 
+        #region Initials
+
         private void InitGameWrold()
         {
-            _gameFactory.CreatePlayer(GameObject.FindGameObjectWithTag(INITIAL_POINT));
+            InitWorldData();
+
+            LevelStaticData levelData = GetLevelStaticData();
+
+            InitSpawners(levelData);
+
+            GameObject player = InitPlayer(levelData);
+
+            InitHud(player);
+        }
+
+        private void InitHud(GameObject player)
+        {
             _gameFactory.CreateHud();
+        }
+
+        private void InitSpawners(LevelStaticData levelData)
+        {
+            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawner)
+                _gameFactory.CreateSpawner(
+                    spawnerData.Position,
+                    spawnerData.Id,
+                    spawnerData.MonsterTypeId,
+                    spawnerData.WaveCount,
+                    spawnerData.WaveDelay);
+        }
+
+        private GameObject InitPlayer(LevelStaticData levelData) => _gameFactory.CreatePlayer(levelData.InitialHeroPosition);
+
+        private void InitWorldData() 
+        {
+            _worldData = new WorldData();
+        }
+
+        #endregion
+
+        private LevelStaticData GetLevelStaticData()
+        {
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelStaticData levelData = _dataService.ForLevel(sceneKey);
+
+            return levelData;
         }
     }
 }

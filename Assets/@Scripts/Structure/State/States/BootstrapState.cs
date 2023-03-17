@@ -1,6 +1,7 @@
 using Defender.Assets;
 using Defender.Data.Static;
 using Defender.Factory;
+using Defender.Logic;
 using Defender.Service;
 using Defender.System;
 
@@ -26,19 +27,37 @@ namespace Defender.State
 
         public void Enter() => _sceneLoader.Load(INITIAL_SCENE, onLoaded: EnterLoadLevel);
 
-        public void Exit() {}
+        public void Exit() { }
 
         private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>(MAIN_SCENE);
 
         private void RegisterService()
         {
-            _services.RegisterSingle<IAssetsProvider>(new AssetsProvider());
-           
+            RegisterAssetProvider();
+            RegisterStaticData();
+            RegisterGameFactory();
+        }
+
+        private void RegisterGameFactory()
+        {
             _services.RegisterSingle<IGameFactory>(
-                new GameFactory(
-                _services.Single<IAssetsProvider>(),
-                 _services.Single<IStaticDataService>(),
-                _services.Single<IRandomService>()));
+                            new GameFactory(
+                            _services.Single<IAssetsProvider>(),
+                            _services.Single<IStaticDataService>(),
+                            _services.Single<IRandomService>()));
+        }
+
+        private void RegisterAssetProvider()
+        {
+            var assetProvider = new AssetsProvider();
+            _services.RegisterSingle<IAssetsProvider>(assetProvider);
+        }
+
+        private void RegisterStaticData()
+        {
+            IStaticDataService staticData = new StaticDataService();
+            staticData.LoadMonsters();
+            _services.RegisterSingle(staticData);
         }
     }
 }

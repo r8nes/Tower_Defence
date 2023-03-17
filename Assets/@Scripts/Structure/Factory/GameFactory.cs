@@ -1,6 +1,8 @@
 ﻿using Defender.Assets;
 using Defender.Data.Static;
 using Defender.Entity;
+using Defender.Logic;
+using Defender.Service;
 using UnityEngine;
 
 namespace Defender.Factory
@@ -22,10 +24,10 @@ namespace Defender.Factory
 
         public void CreateHud() => _assets.Instantiate(AssetsPath.GLOBAL_HUD_PATH);
 
-        public GameObject CreatePlayer(GameObject initialPoint) => PlayerGameObject =
-            _assets.Instantiate(AssetsPath.PLAYER_PATH, point: initialPoint.transform.position);
+        public GameObject CreatePlayer(Vector2 initialPoint) => PlayerGameObject =
+            _assets.Instantiate(AssetsPath.PLAYER_PATH, point: initialPoint);
 
-        public GameObject CreateMonster(EnemyTypeId typeId, Transform parent)
+        public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
             GameObject monster = Object.Instantiate(monsterData.Prefab, parent.position, Quaternion.identity, parent);
@@ -37,15 +39,35 @@ namespace Defender.Factory
 
             monster.GetComponent<EnemyMovement>().Construct(PlayerGameObject.transform);
 
-            //var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
+            var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
 
-            //lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
-            //lootSpawner.Construct(this, _random);
+            lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
+            lootSpawner.Construct(this, _random);
 
             if (monster.TryGetComponent(out EnemyMovement movement))
                 movement.Construct(PlayerGameObject.transform);
 
             return monster;
+        }
+
+        public void CreateSpawner(Vector2 at, string spawnerId, EnemyTypeId monsterTypeId, int waveCount, float delay)
+        {
+            SpawnPoint spawner = _assets.Instantiate(AssetsPath.SPAWNER_PATH, at)
+                .GetComponent<SpawnPoint>();
+
+            spawner.Construct(this);
+            spawner.Id = spawnerId;
+            spawner.MonsterTypeId = monsterTypeId;
+        }
+
+        public LootPiece CreateLoot()
+        {
+            LootPiece loot = _assets.Instantiate(AssetsPath.LOOT_PATH)
+                .GetComponent<LootPiece>();
+
+            //loot.Construct();
+
+            return loot;
         }
     }
 }

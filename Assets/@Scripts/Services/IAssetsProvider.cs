@@ -1,7 +1,6 @@
-﻿using Defender.Service;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Defender.Assets
+namespace Defender.Service
 {
     public interface IAssetsProvider : IService
     {

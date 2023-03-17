@@ -1,3 +1,4 @@
+using Defender.Service;
 using UnityEngine;
 
 namespace Defender.Assets

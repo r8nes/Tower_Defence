@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906598084c1186846b9d30bbea04df45, type: 3}
+  m_Name: LevelData
+  m_EditorClassIdentifier: 
+  LevelKey: Main
+  InitialHeroPosition: {x: 0, y: 0}
+  EnemySpawner:
+  - Id: Main + 0c070759-58de-415f-8342-0fa520d15157
+    MonsterTypeId: 0
+    Position: {x: 4.45, y: -0.03}
+    WaveCount: 10
+    WaveDelay: 1
+  - Id: Main + 277bbc42-765f-4c6a-991b-58cf99d136de
+    MonsterTypeId: 0
+    Position: {x: -4.49, y: -0.06}
+    WaveCount: 10
+    WaveDelay: 1
+  - Id: Main + 64bcdd07-4b7d-4c49-9786-d0ddebbf5889
+    MonsterTypeId: 0
+    Position: {x: 4.13, y: -6.56}
+    WaveCount: 10
+    WaveDelay: 1
+  - Id: Main + ec811d3b-852a-4b20-9046-c4028e36d9d0
+    MonsterTypeId: 0
+    Position: {x: -4.38, y: -6.3}
+    WaveCount: 10
+    WaveDelay: 1
+  - Id: Main + 505301e3-6e2f-4aba-9e8a-9377575e1732
+    MonsterTypeId: 0
+    Position: {x: 3.96, y: 6.33}
+    WaveCount: 10
+    WaveDelay: 1
+  - Id: Main + e8ae0294-c232-415c-9d56-ed21684b1309
+    MonsterTypeId: 0
+    Position: {x: -4.09, y: 5.98}
+    WaveCount: 10
+    WaveDelay: 1
