@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Defender.Data.Static;
+using Defender.Data;
 using Defender.Logic;
 using Defender.Service;
 using UnityEngine;

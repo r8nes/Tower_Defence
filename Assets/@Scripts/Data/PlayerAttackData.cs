@@ -5,7 +5,10 @@ namespace Defender.Data
     [Serializable]
     public class PlayerAttackData 
     {
-        public float Damage;
+        public float Speed;
+        public float Damage
+
+        public float DelaySpeedTime;
         public float DamageRadius;
     }
 }

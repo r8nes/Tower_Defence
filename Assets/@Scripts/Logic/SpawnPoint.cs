@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-using Defender.Data.Static;
-using Defender.Entity;
+using Defender.Data;
 using Defender.Factory;
 using UnityEngine;
 

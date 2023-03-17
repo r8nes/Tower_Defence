@@ -1,4 +1,5 @@
-﻿using Defender.Data.Static;
+﻿using Defender.Data;
+using Defender.Data.Static;
 using UnityEngine;
 
 namespace Defender.Logic

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Defender.Logic;
 using UnityEngine;
 
 namespace Defender.Data.Static

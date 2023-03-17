@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Defender.Data;
 using Defender.Data.Static;
 using Defender.Service;
 using UnityEngine;

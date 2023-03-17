@@ -9,6 +9,7 @@ namespace Defender.Entity
     public class PlayerAttack : MonoBehaviour, ISavedProgressReader
     {
         private bool _attackIsActive;
+
         public PlayerAttackData AttackStats;
 
         private void Update()
@@ -22,11 +23,13 @@ namespace Defender.Entity
         private void PlayAttack()
         {
             GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject();
+            
             if (bullet != null)
             {
                 bullet.transform.position = transform.position;
                 bullet.transform.rotation = transform.rotation;
 
+                bullet.GetComponent<Ammo>().Construct(AttackStats.Damage);
                 bullet.SetActive(true);
             }
         }

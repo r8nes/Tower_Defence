@@ -1,4 +1,4 @@
-namespace Defender.Data.Static
+namespace Defender.Data
 {
     public enum EnemyTypeId
     {

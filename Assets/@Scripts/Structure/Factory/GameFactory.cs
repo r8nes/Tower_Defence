@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Defender.Assets;
+using Defender.Data;
 using Defender.Data.Static;
 using Defender.Entity;
 using Defender.Logic;
