@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Defender.Data;
-using Defender.Service;
+using Defender.Utility.EventBus;
 using UnityEngine;
 
 namespace Defender.Entity
 {
-    public class PlayerAttack : MonoBehaviour, ISavedProgress
+    public class PlayerAttack : MonoBehaviour
     {
         private float _time;
         private bool _attackIsActive;
@@ -13,13 +13,18 @@ namespace Defender.Entity
         private Queue<EnemyDeath> Enemies = new Queue<EnemyDeath>();
 
         public GameObject Ammo;
-        public PlayerAttackData AttackStats;
+        private PlayerProgress _playerProgress;
+
+        public void Construct(PlayerProgress progress) 
+        {
+            _playerProgress = progress;
+        }
 
         private void Update()
         {
             _time += Time.deltaTime;
 
-            float nextTimeToFire = 1 / AttackStats.FireRate;
+            float nextTimeToFire = 1 / _playerProgress.PlayerDamageData.FireRate;
 
             if (_time >= nextTimeToFire)
             {
@@ -41,10 +46,11 @@ namespace Defender.Entity
                 {
                     projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
-                    var ammo = projectile.GetComponent<Ammo>();
+                    Ammo ammo = projectile.GetComponent<Ammo>();
+                  
                     ammo.Construct(
-                        AttackStats.BulletSpeed,
-                        AttackStats.Damage,
+                        _playerProgress.PlayerDamageData.BulletSpeed,
+                        _playerProgress.PlayerDamageData.Damage,
                         Enemies.Peek().gameObject);
                 }
             }
@@ -67,13 +73,6 @@ namespace Defender.Entity
             {
                 Enemies.Dequeue();
             }
-        }
-
-        public void LoadProgress(PlayerProgress progress) => AttackStats = progress.PlayerDamageData;
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            AttackStats = progress.PlayerDamageData;
         }
     }
 }

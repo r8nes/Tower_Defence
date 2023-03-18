@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Segments: 32
-  PlayerAttack: {fileID: -5226984144288898110}
   CircleCollider: {fileID: 1161993690657264211}
+  PlayerAttack: {fileID: -5226984144288898110}
 --- !u!58 &1161993690657264211
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 5912247728930326338}
   - component: {fileID: 2312080595871725117}
   - component: {fileID: -5226984144288898110}
+  - component: {fileID: -3425208268517716321}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -262,9 +263,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963ebf1a57d30fd42a6a6c67b3ba2352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackStats:
-    Damage: 3
-    DamageRadius: 6
-    BulletSpeed: 6
-    FireRate: 5
   Ammo: {fileID: 6471156048066443811, guid: df6b6f8977313d04e87c3a1b82912ecd, type: 3}
+--- !u!114 &-3425208268517716321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677408884255278479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0d439658aa57c49b5aca18715521ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

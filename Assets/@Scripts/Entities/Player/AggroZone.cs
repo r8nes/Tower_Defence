@@ -12,19 +12,19 @@ namespace Defender.Entity
         public CircleCollider2D CircleCollider;
         public PlayerAttack PlayerAttack;
 
-        private ProgressService _playerProgress;
+        private PlayerProgress _playerProgress;
         private LineRenderer _lineRenderer;
 
         private Color color = Color.white;
 
-        public void Construct(ProgressService progress) 
+        public void Construct(PlayerProgress progress) 
         {
             _playerProgress = progress;
         }
 
         private void Start()
         {
-            var radius = _playerProgress.Progress.PlayerDamageData.DamageRadius;
+            var radius = _playerProgress.PlayerDamageData.DamageRadius;
 
             SetupLineRenderer();
             SetCirclePosition(out Vector3[] positions, out float angle, out float angleStep);

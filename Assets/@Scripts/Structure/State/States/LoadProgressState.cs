@@ -32,16 +32,17 @@ namespace Defender.State
             _saveLoadService.LoadProgress()
             ?? NewProgress();
 
+        // TODO
         private PlayerProgress NewProgress()
         {
             var progress = new PlayerProgress();
 
-            progress.PlayerDamageData.Damage = 3;
+            progress.PlayerDamageData.Damage = 1;
             progress.PlayerDamageData.DamageRadius = 6f;
             progress.PlayerDamageData.BulletSpeed = 2f;
-            progress.PlayerDamageData.FireRate = 1f;
+            progress.PlayerDamageData.FireRate = 0.4f;
 
-            progress.PlayerHealthData.MaxHP = 20f;
+            progress.PlayerHealthData.MaxHP = 6f;
             progress.PlayerHealthData.ResetCurrentHP();
 
             return progress;

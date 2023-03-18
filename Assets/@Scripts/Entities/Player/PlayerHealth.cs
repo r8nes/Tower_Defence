@@ -1,15 +1,20 @@
 using System;
 using Defender.Data;
-using Defender.Service;
 using UnityEngine;
 
 namespace Defender.Entity
 {
-    public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
+    public class PlayerHealth : MonoBehaviour, IHealth
     {
         private PlayerHealthData _healthData;
 
         public event Action HealthChanged;
+
+        public void Construct(PlayerProgress progress) 
+        {
+            _healthData = progress.PlayerHealthData;
+            Current = _healthData.MaxHP;
+        }
 
         public float Current
         {
@@ -30,23 +35,28 @@ namespace Defender.Entity
             set => _healthData.MaxHP = value;
         }
 
-        public void LoadProgress(PlayerProgress progress)
-        {
-            _healthData = progress.PlayerHealthData;
-            HealthChanged?.Invoke();
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.PlayerHealthData.CurrentHP = Current;
-            progress.PlayerHealthData.MaxHP = Max;
-        }
-
         public void TakeDamage(float damage)
         {
             if (Current <= 0) return;
 
             Current -= damage;
+            Debug.Log($"{Max}/{Current}");
         }
+
+        #region Unused ISaveProgress
+
+        //public void LoadProgress(PlayerProgress progress)
+        //{
+        //    _healthData = progress.PlayerHealthData;
+        //    HealthChanged?.Invoke();
+        //}
+
+        //public void UpdateProgress(PlayerProgress progress)
+        //{
+        //    progress.PlayerHealthData.CurrentHP = Current;
+        //    progress.PlayerHealthData.MaxHP = Max;
+        //}
+
+        #endregion
     }
 }

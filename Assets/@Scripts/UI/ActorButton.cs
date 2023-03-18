@@ -1,6 +1,4 @@
-using System;
 using Defender.Data;
-using Defender.Service;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +12,6 @@ namespace Defender.UI
         public PlayerAttackParameter PlayerParamter;
 
         private PlayerAttackData _playerProgress;
-        public event Action OnButtonPressed;
 
         public void Construct(PlayerProgress progress)
         {
@@ -26,8 +23,6 @@ namespace Defender.UI
         {
             _playerProgress.SetParameter(PlayerParamter, NumberToIncrement);
             ParameterName.text = _playerProgress.GetParameter(PlayerParamter).ToString();
-
-            OnButtonPressed?.Invoke();
         }
     }
 }

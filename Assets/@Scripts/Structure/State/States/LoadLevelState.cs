@@ -1,7 +1,9 @@
 ﻿using Defender.Data.Static;
+using Defender.Entity;
 using Defender.Factory;
 using Defender.Service;
 using Defender.System;
+using Defender.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -42,7 +44,7 @@ namespace Defender.State
         private void OnLoaded()
         {
             InitGameWrold();
-            InformProgressReaders();
+            //InformProgressReaders();
 
             _gameStateMachine.Enter<GameLoopState>();
         }
@@ -60,9 +62,16 @@ namespace Defender.State
             InitHud(player);
         }
 
-        private void InitHud(GameObject player)
+        private GameObject InitHud(GameObject player)
         {
-            _gameFactory.CreateHud();
+            GameObject hud = _gameFactory.CreateHud();
+
+            if (hud.TryGetComponent(out ActorUI actor))
+            {
+                actor.Construct(player.GetComponent<PlayerHealth>());
+            }
+
+            return hud;
         }
 
         private void InitSpawners(LevelStaticData levelData)
@@ -80,18 +89,18 @@ namespace Defender.State
 
         #endregion
 
-        private void InformProgressReaders()
-        {
-            foreach (ISavedProgressReader reader in _gameFactory.ProgressReader)
-                reader.LoadProgress(_progressService.Progress);
-        }
-
         private LevelStaticData GetLevelStaticData()
         {
             string sceneKey = SceneManager.GetActiveScene().name;
             LevelStaticData levelData = _dataService.ForLevel(sceneKey);
 
             return levelData;
+        }
+
+        private void InformProgressReaders()
+        {
+            foreach (ISavedProgressReader reader in _gameFactory.ProgressReader)
+                reader.LoadProgress(_progressService.Progress);
         }
     }
 }

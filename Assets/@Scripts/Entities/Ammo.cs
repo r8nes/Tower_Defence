@@ -26,7 +26,7 @@ namespace Defender.Entity
         {
             if (_enemyGameObject != null)
             {
-                gameObject.transform.position = Vector3.Lerp(transform.position, _enemyGameObject.transform.position, Time.deltaTime * _speed / _distance);
+                gameObject.transform.position = Vector3.MoveTowards(transform.position, _enemyGameObject.transform.position, Time.deltaTime * _speed / _distance);
             }
             else
             {

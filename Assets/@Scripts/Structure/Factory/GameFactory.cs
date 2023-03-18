@@ -38,17 +38,6 @@ namespace Defender.Factory
 
         #region CreateMethods
 
-        public void CreateHud()
-        {
-            GameObject hud = InstantiateRegistered(AssetsPath.GLOBAL_HUD_PATH);
-
-            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
-            ActorButton[] actorButtons = hud.GetComponentsInChildren<ActorButton>();
-
-            for (int i = 0; i < actorButtons.Length; i++)
-                actorButtons[i].Construct(_progressService.Progress);
-        }
-
         public void CreateSpawner(Vector2 at, string spawnerId, EnemyTypeId monsterTypeId, int waveCount, float delay)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetsPath.SPAWNER_PATH, at)
@@ -60,7 +49,20 @@ namespace Defender.Factory
 
             spawner.StartSpawn();
         }
-        
+
+        public GameObject CreateHud()
+        {
+            GameObject hud = InstantiateRegistered(AssetsPath.GLOBAL_HUD_PATH);
+
+            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
+            ActorButton[] actorButtons = hud.GetComponentsInChildren<ActorButton>();
+
+            for (int i = 0; i < actorButtons.Length; i++)
+                actorButtons[i].Construct(_progressService.Progress);
+
+            return hud;
+        }
+
         public LootPiece CreateLoot()
         {
             LootPiece loot = InstantiateRegistered(AssetsPath.LOOT_PATH)
@@ -72,8 +74,11 @@ namespace Defender.Factory
 
         public GameObject CreatePlayer(Vector2 initialPoint)
         {
-            PlayerGameObject = InstantiateRegistered(AssetsPath.PLAYER_PATH,  initialPoint);
-            PlayerGameObject.GetComponentInChildren<AggroZone>().Construct(_progressService as ProgressService);
+            PlayerGameObject = InstantiateRegistered(AssetsPath.PLAYER_PATH, initialPoint);
+
+            PlayerGameObject.GetComponent<PlayerAttack>().Construct(_progressService.Progress);
+            PlayerGameObject.GetComponent<PlayerHealth>().Construct(_progressService.Progress);
+            PlayerGameObject.GetComponentInChildren<AggroZone>().Construct(_progressService.Progress);
 
             return PlayerGameObject;
         }
@@ -100,6 +105,9 @@ namespace Defender.Factory
 
         #endregion
 
+        /* Регистрация объектов сейчас пустует, ибо сохранять данные пока не нужно.
+            Но я добавил этот сервис в прототип, если захочу с ним сделать что-то в дальнейшем */
+
         #region RegisterMethods
 
         public void Register(ISavedProgressReader reader)
@@ -112,13 +120,13 @@ namespace Defender.Factory
 
         private void RegisterProgressWatchers(GameObject gameObject)
         {
-            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
+            foreach (ISavedProgressReader progressReader in gameObject.GetComponents<ISavedProgressReader>())
                 Register(progressReader);
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector2 at)
         {
-            GameObject gameObject = _assets.Instantiate(prefabPath,  at);
+            GameObject gameObject = _assets.Instantiate(prefabPath, at);
             RegisterProgressWatchers(gameObject);
 
             return gameObject;

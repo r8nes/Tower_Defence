@@ -11,7 +11,7 @@ namespace Defender.Data
         public float BulletSpeed;
         public float FireRate;
 
-        public void SetParameter(PlayerAttackParameter parameterType, int value)
+        public void SetParameter(PlayerAttackParameter parameterType, float value)
         {
             switch (parameterType)
             {

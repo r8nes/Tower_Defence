@@ -1,6 +1,4 @@
-using Defender.Data;
 using Defender.Entity;
-using Defender.Service;
 using UnityEngine;
 
 namespace Defender.UI

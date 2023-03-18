@@ -12,36 +12,34 @@ namespace Defender.Entity
         public GameObject DeathFX;
 
         public ShakeCameraData ShakeData;
+
         public event Action DeathHappend;
 
         private void Start()
         {
             Health.HealthChanged += OnHealthChanged;
-            Movement.OnPlayerTriggered += Die;
+            Movement.OnPlayerTriggered += OnPlayerColliding;
         }
-
         private void OnDestroy()
         {
             Health.HealthChanged -= OnHealthChanged;
-            Movement.OnPlayerTriggered -= Die;
+            Movement.OnPlayerTriggered -= OnPlayerColliding;
         }
 
-        public void Die()
+        public void DestroyEnemy()
         {
             SpawnDeathEffect();
             DeathHappend?.Invoke();
 
             Destroy(gameObject);
         }
-
         private void OnHealthChanged()
         {
             if (Health.Current <= 0)
             {
-                Die();
+                DestroyEnemy();
             }
         }
-
         private void SpawnDeathEffect()
         {
             Instantiate(DeathFX, transform.position, Quaternion.identity);
@@ -50,6 +48,15 @@ namespace Defender.Entity
                 ShakeData.Duration, 
                 ShakeData.Magnitude,
                 ShakeData.Noize);
+        }
+        private void OnPlayerColliding(Transform player)
+        {
+            if (player.TryGetComponent(out IHealth health))
+            {
+                health.TakeDamage(1f);
+            }
+
+            DestroyEnemy();
         }
     }
 }

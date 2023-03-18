@@ -10,7 +10,7 @@ namespace Defender.Entity
 
         private Transform _playerTransform;
 
-        public event Action OnPlayerTriggered;
+        public event Action<Transform> OnPlayerTriggered;
 
         public void Construct(Transform playerTransform, float speed)
         {
@@ -22,13 +22,18 @@ namespace Defender.Entity
 
         private void Update()
         {
+            MoveEnemyToPlayer();
+        }
+
+        private void MoveEnemyToPlayer()
+        {
             if (_playerTransform && !IsReachPlayer())
             {
                 transform.position = Vector2.MoveTowards(transform.position, _playerTransform.transform.position, _speed * Time.deltaTime);
             }
             else
             {
-                OnPlayerTriggered?.Invoke();
+                OnPlayerTriggered?.Invoke(_playerTransform);
             }
         }
     }
