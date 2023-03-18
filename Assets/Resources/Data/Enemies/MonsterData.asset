@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
   Hp: 6
-  Speed: 0.6
+  Speed: 2.6
   MinLoot: 5
   MaxLoot: 10
   Prefab: {fileID: 6877398693708334891, guid: 7e554823b5d26fb4faaf23d2f90ce472, type: 3}
