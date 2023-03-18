@@ -30,6 +30,12 @@ namespace Defender.Factory
             _progressService = progressService;
         }
 
+        public void Cleanup()
+        {
+            ProgressReader.Clear();
+            ProgressWriters.Clear();
+        }
+
         #region CreateMethods
 
         public void CreateHud()

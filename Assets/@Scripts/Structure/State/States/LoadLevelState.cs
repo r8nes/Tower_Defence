@@ -30,6 +30,7 @@ namespace Defender.State
         public void Enter(string sceneName)
         {
             _loadingUI.ShowLoader();
+            _gameFactory.Cleanup();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
