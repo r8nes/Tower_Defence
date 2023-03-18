@@ -266,5 +266,5 @@ MonoBehaviour:
     Damage: 3
     DamageRadius: 6
     BulletSpeed: 6
-    FireRate: 0.1
+    FireRate: 5
   Ammo: {fileID: 6471156048066443811, guid: df6b6f8977313d04e87c3a1b82912ecd, type: 3}

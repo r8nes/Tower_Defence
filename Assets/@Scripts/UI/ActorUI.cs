@@ -1,10 +1,13 @@
+using Defender.Data;
 using Defender.Entity;
+using Defender.Service;
 using UnityEngine;
 
-namespace Defender
+namespace Defender.UI
 {
     public class ActorUI : MonoBehaviour
     {
+        [Header("HPBar")]
         public HpBar HpBar;
 
         private IHealth _health;

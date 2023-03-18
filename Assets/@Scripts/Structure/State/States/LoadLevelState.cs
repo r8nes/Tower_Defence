@@ -41,6 +41,7 @@ namespace Defender.State
         private void OnLoaded()
         {
             InitGameWrold();
+            InformProgressReaders();
 
             _gameStateMachine.Enter<GameLoopState>();
         }
@@ -77,6 +78,12 @@ namespace Defender.State
         private GameObject InitPlayer(LevelStaticData levelData) => _gameFactory.CreatePlayer(levelData.InitialHeroPosition);
 
         #endregion
+
+        private void InformProgressReaders()
+        {
+            foreach (ISavedProgressReader reader in _gameFactory.ProgressReader)
+                reader.LoadProgress(_progressService.Progress);
+        }
 
         private LevelStaticData GetLevelStaticData()
         {

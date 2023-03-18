@@ -4,7 +4,7 @@ namespace Defender.Entity
 {
     public class Ammo : MonoBehaviour, IAmmo
     {
-        private int _damage;
+        private float _damage;
         private float _speed;
         private float _distance;
   
@@ -23,7 +23,7 @@ namespace Defender.Entity
             gameObject.transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime *_speed / _distance);
         }
 
-        public void Construct(float speed, int damage, Vector2 target)
+        public void Construct(float speed, float damage, Vector2 target)
         {
             _speed = speed;
             _damage = damage;

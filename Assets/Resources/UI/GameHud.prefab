@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 1526227162755031587}
   - component: {fileID: 1526227162755031586}
   - component: {fileID: 1526227162755031613}
+  - component: {fileID: 361603626412220074}
   m_Layer: 5
   m_Name: RadiusUpgrade
   m_TagString: Untagged
@@ -594,7 +595,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1526227162755031586}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 361603626412220074}
+        m_TargetAssemblyTypeName: Defender.UI.ActorButton, Assembly-CSharp
+        m_MethodName: UpgradeProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &361603626412220074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526227162755031615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f497b56e3cfb9c4eabf424ee0a44b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumberToIncrement: 1
+  ParameterName: {fileID: 8624138518819257204}
+  PlayerParamter: 1
 --- !u!1 &1526227162770598075
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +770,7 @@ GameObject:
   - component: {fileID: 1526227162838656270}
   - component: {fileID: 1526227162838656265}
   - component: {fileID: 1526227162838656264}
+  - component: {fileID: 3802137829029941382}
   m_Layer: 5
   m_Name: AttackUpgrade
   m_TagString: Untagged
@@ -850,7 +879,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1526227162838656265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3802137829029941382}
+        m_TargetAssemblyTypeName: Defender.ActorButton, Assembly-CSharp
+        m_MethodName: UpgradeProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3802137829029941382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526227162838656266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f497b56e3cfb9c4eabf424ee0a44b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumberToIncrement: 1
+  ParameterName: {fileID: 4938986059147851761}
+  PlayerParamter: 0
 --- !u!1 &1526227162989361836
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +919,7 @@ GameObject:
   - component: {fileID: 1526227162989361808}
   - component: {fileID: 1526227162989361811}
   - component: {fileID: 1526227162989361810}
+  - component: {fileID: 1565200940471485323}
   m_Layer: 5
   m_Name: FireRateUpgrade
   m_TagString: Untagged
@@ -971,7 +1028,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1526227162989361811}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1565200940471485323}
+        m_TargetAssemblyTypeName: Defender.UI.ActorButton, Assembly-CSharp
+        m_MethodName: UpgradeProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1565200940471485323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526227162989361836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f497b56e3cfb9c4eabf424ee0a44b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumberToIncrement: 1
+  ParameterName: {fileID: 7791381973334576707}
+  PlayerParamter: 3
 --- !u!1 &1526227163050027412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,6 +1505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526227163557024432}
+  - component: {fileID: 7489286693423583662}
   m_Layer: 5
   m_Name: ValuePanel
   m_TagString: Untagged
@@ -1451,6 +1536,19 @@ RectTransform:
   m_AnchoredPosition: {x: 285, y: 0}
   m_SizeDelta: {x: 570, y: 293}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7489286693423583662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526227163557024435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ad3fe5783d5f54b95a583422c221b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Counter: {fileID: 1526227162458904480}
 --- !u!1 &1526227163578241431
 GameObject:
   m_ObjectHideFlags: 0

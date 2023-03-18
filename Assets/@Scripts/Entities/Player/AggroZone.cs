@@ -1,3 +1,5 @@
+using Defender.Data;
+using Defender.Service;
 using UnityEngine;
 
 namespace Defender.Entity
@@ -7,15 +9,22 @@ namespace Defender.Entity
     {
         public int Segments = 32;
 
-        public PlayerAttack PlayerAttack;
         public CircleCollider2D CircleCollider;
+        public PlayerAttack PlayerAttack;
 
+        private ProgressService _playerProgress;
         private LineRenderer _lineRenderer;
+
         private Color color = Color.white;
+
+        public void Construct(ProgressService progress) 
+        {
+            _playerProgress = progress;
+        }
 
         private void Start()
         {
-            var radius = PlayerAttack.AttackStats.DamageRadius;
+            var radius = _playerProgress.Progress.PlayerDamageData.DamageRadius;
 
             SetupLineRenderer();
             SetCirclePosition(out Vector3[] positions, out float angle, out float angleStep);

@@ -39,7 +39,9 @@ namespace Defender.State
             var progress = new PlayerProgress();
 
             progress.PlayerDamageData.Damage = 3;
-            progress.PlayerDamageData.DamageRadius = 0.5f;
+            progress.PlayerDamageData.DamageRadius = 6f;
+            progress.PlayerDamageData.BulletSpeed = 2f;
+            progress.PlayerDamageData.FireRate = 1f;
 
             progress.PlayerHealthData.MaxHP = 20f;
             progress.PlayerHealthData.ResetCurrentHP();

@@ -5,6 +5,7 @@ using Defender.Data.Static;
 using Defender.Entity;
 using Defender.Logic;
 using Defender.Service;
+using Defender.UI;
 using UnityEngine;
 
 namespace Defender.Factory
@@ -37,10 +38,24 @@ namespace Defender.Factory
             ProgressReader.Add(reader);
         }
 
-        public void CreateHud() => _assets.Instantiate(AssetsPath.GLOBAL_HUD_PATH);
+        public void CreateHud()
+        {
+            GameObject hud = _assets.Instantiate(AssetsPath.GLOBAL_HUD_PATH);
 
-        public GameObject CreatePlayer(Vector2 initialPoint) => PlayerGameObject =
-            _assets.Instantiate(AssetsPath.PLAYER_PATH, point: initialPoint);
+            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
+            ActorButton[] actorButtons = hud.GetComponentsInChildren<ActorButton>();
+
+            for (int i = 0; i < actorButtons.Length; i++)
+                actorButtons[i].Construct(_progressService.Progress);
+        }
+
+        public GameObject CreatePlayer(Vector2 initialPoint)
+        {
+            PlayerGameObject = _assets.Instantiate(AssetsPath.PLAYER_PATH, point: initialPoint);
+            PlayerGameObject.GetComponentInChildren<AggroZone>().Construct(_progressService as ProgressService);
+
+            return PlayerGameObject;
+        }
 
         public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
         {

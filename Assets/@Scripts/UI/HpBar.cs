@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Defender.Entity
+namespace Defender.UI
 {
     public class HpBar : MonoBehaviour
     {
