@@ -18,11 +18,11 @@ namespace Defender.Entity
             _speed = speed;
         }
 
-        public bool IsReachPlayer() => Vector3.Distance(transform.position, _playerTransform.position) >= _minDistance;
+        public bool IsReachPlayer() => Vector3.Distance(transform.position, _playerTransform.position) <= _minDistance;
 
         private void Update()
         {
-            if (_playerTransform && IsReachPlayer())
+            if (_playerTransform && !IsReachPlayer())
             {
                 transform.position = Vector2.MoveTowards(transform.position, _playerTransform.transform.position, _speed * Time.deltaTime);
             }

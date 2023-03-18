@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MonsterData
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
-  Hp: 10
+  Hp: 6
   Speed: 0.6
   MinLoot: 5
   MaxLoot: 10

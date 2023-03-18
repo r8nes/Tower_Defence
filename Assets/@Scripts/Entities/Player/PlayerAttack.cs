@@ -56,7 +56,6 @@ namespace Defender.Entity
             {
                 enemyDeathComponent.DeathHappend += DisableAttack;
                 Enemies.Enqueue(enemyDeathComponent);
-                Debug.Log(Enemies.Count);
                 _attackIsActive = true;
             }
         }
