@@ -11,20 +11,20 @@ namespace Defender.Data
         public float BulletSpeed;
         public float FireRate;
 
-        public void SetParameter(PlayerAttackParamter parameterType, int value)
+        public void SetParameter(PlayerAttackParameter parameterType, int value)
         {
             switch (parameterType)
             {
-                case PlayerAttackParamter.DAMAGE:
+                case PlayerAttackParameter.DAMAGE:
                     Damage += value;
                     break;
-                case PlayerAttackParamter.DAMAGE_RADIUS:
+                case PlayerAttackParameter.DAMAGE_RADIUS:
                     DamageRadius += value;
                     break;
-                case PlayerAttackParamter.BULLET_SPEED:
+                case PlayerAttackParameter.BULLET_SPEED:
                     BulletSpeed += value;
                     break;
-                case PlayerAttackParamter.FIRE_RATE:
+                case PlayerAttackParameter.FIRE_RATE:
                     FireRate += value;
                     break;
                 default:
@@ -32,20 +32,20 @@ namespace Defender.Data
             }
         }
 
-        public float GetParameter(PlayerAttackParamter parameterType)
+        public float GetParameter(PlayerAttackParameter parameterType)
         {
             return parameterType switch
             {
-                PlayerAttackParamter.DAMAGE => Damage,
-                PlayerAttackParamter.DAMAGE_RADIUS => DamageRadius,
-                PlayerAttackParamter.BULLET_SPEED => BulletSpeed,
-                PlayerAttackParamter.FIRE_RATE => FireRate,
+                PlayerAttackParameter.DAMAGE => Damage,
+                PlayerAttackParameter.DAMAGE_RADIUS => DamageRadius,
+                PlayerAttackParameter.BULLET_SPEED => BulletSpeed,
+                PlayerAttackParameter.FIRE_RATE => FireRate,
                 _ => throw new Exception($"{parameterType} is illegal"),
             };
         }
     }
 
-    public enum PlayerAttackParamter 
+    public enum PlayerAttackParameter 
     {
         DAMAGE = 0,
         DAMAGE_RADIUS = 1,

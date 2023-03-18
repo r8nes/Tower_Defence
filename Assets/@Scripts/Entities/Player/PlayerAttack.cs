@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace Defender.Entity
 {
-    public class PlayerAttack : MonoBehaviour, ISavedProgressReader
+    public class PlayerAttack : MonoBehaviour, ISavedProgress
     {
         private float _time;
         private bool _attackIsActive;
 
         private Queue<EnemyDeath> Enemies = new Queue<EnemyDeath>();
 
-        public PlayerAttackData AttackStats;
         public GameObject Ammo;
+        public PlayerAttackData AttackStats;
 
         private void Update()
         {
@@ -45,7 +45,7 @@ namespace Defender.Entity
                     ammo.Construct(
                         AttackStats.BulletSpeed,
                         AttackStats.Damage,
-                        Enemies.Peek().transform.position);
+                        Enemies.Peek().gameObject);
                 }
             }
         }
@@ -54,7 +54,6 @@ namespace Defender.Entity
         {
             if (enemy.TryGetComponent(out EnemyDeath enemyDeathComponent))
             {
-                enemyDeathComponent.DeathHappend += DisableAttack;
                 Enemies.Enqueue(enemyDeathComponent);
                 _attackIsActive = true;
             }
@@ -64,10 +63,17 @@ namespace Defender.Entity
         {
             if (Enemies.Count <= 0)
                 _attackIsActive = false;
-            else
+            else 
+            {
                 Enemies.Dequeue();
+            }
         }
 
         public void LoadProgress(PlayerProgress progress) => AttackStats = progress.PlayerDamageData;
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            AttackStats = progress.PlayerDamageData;
+        }
     }
 }

@@ -6,8 +6,8 @@ namespace Defender.UI
 {
     public class LootCounter : MonoBehaviour
     {
-        public TextMeshProUGUI Counter;
         private WorldData _worldData;
+        public TextMeshProUGUI Counter;
 
         public void Construct(WorldData worldData)
         {
@@ -20,6 +20,6 @@ namespace Defender.UI
             UpdatedCounter();
         }
 
-        private void UpdatedCounter() => Counter.text = $"{_worldData.LootData.Collected}";
+        private void UpdatedCounter() => Counter.text = $"$ {_worldData.LootData.Collected}";
     }
 }

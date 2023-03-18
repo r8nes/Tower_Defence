@@ -104,8 +104,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: {fileID: 3250916903617423144}
-  EnemyMovement: {fileID: 7598543757874385790}
+  Movement: {fileID: 7598543757874385790}
   DeathFX: {fileID: 100000, guid: 4f2b448ece6bb4940be1ce4a87b8e110, type: 3}
+  ShakeData:
+    Duration: 0.1
+    Magnitude: 0.1
+    Noize: 0.5
 --- !u!114 &3250916903617423144
 MonoBehaviour:
   m_ObjectHideFlags: 0
