@@ -25,9 +25,7 @@ namespace Defender.State
             _gameStateMachine.Enter<LoadLevelState, string>(START_SCENE);
         }
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
 
         private void LoadProgressOrInitNew() =>
             _progressService.Progress =

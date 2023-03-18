@@ -30,17 +30,11 @@ namespace Defender.Factory
             _progressService = progressService;
         }
 
-        public void Register(ISavedProgressReader reader)
-        {
-            if (reader is ISavedProgress writer)
-                ProgressWriters.Add(writer);
-
-            ProgressReader.Add(reader);
-        }
+        #region CreateMethods
 
         public void CreateHud()
         {
-            GameObject hud = _assets.Instantiate(AssetsPath.GLOBAL_HUD_PATH);
+            GameObject hud = InstantiateRegistered(AssetsPath.GLOBAL_HUD_PATH);
 
             hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
             ActorButton[] actorButtons = hud.GetComponentsInChildren<ActorButton>();
@@ -49,9 +43,30 @@ namespace Defender.Factory
                 actorButtons[i].Construct(_progressService.Progress);
         }
 
+        public void CreateSpawner(Vector2 at, string spawnerId, EnemyTypeId monsterTypeId, int waveCount, float delay)
+        {
+            SpawnPoint spawner = InstantiateRegistered(AssetsPath.SPAWNER_PATH, at)
+                .GetComponent<SpawnPoint>();
+
+            spawner.Construct(this);
+            spawner.Id = spawnerId;
+            spawner.MonsterTypeId = monsterTypeId;
+
+            spawner.StartSpawn();
+        }
+        
+        public LootPiece CreateLoot()
+        {
+            LootPiece loot = InstantiateRegistered(AssetsPath.LOOT_PATH)
+                .GetComponent<LootPiece>();
+
+            loot.Construct(_progressService.Progress.WorldData);
+            return loot;
+        }
+
         public GameObject CreatePlayer(Vector2 initialPoint)
         {
-            PlayerGameObject = _assets.Instantiate(AssetsPath.PLAYER_PATH, point: initialPoint);
+            PlayerGameObject = InstantiateRegistered(AssetsPath.PLAYER_PATH,  initialPoint);
             PlayerGameObject.GetComponentInChildren<AggroZone>().Construct(_progressService as ProgressService);
 
             return PlayerGameObject;
@@ -77,26 +92,40 @@ namespace Defender.Factory
             return monster;
         }
 
-        public void CreateSpawner(Vector2 at, string spawnerId, EnemyTypeId monsterTypeId, int waveCount, float delay)
+        #endregion
+
+        #region RegisterMethods
+
+        public void Register(ISavedProgressReader reader)
         {
-            SpawnPoint spawner = _assets.Instantiate(AssetsPath.SPAWNER_PATH, at)
-                .GetComponent<SpawnPoint>();
+            if (reader is ISavedProgress writer)
+                ProgressWriters.Add(writer);
 
-            spawner.Construct(this);
-            spawner.Id = spawnerId;
-            spawner.MonsterTypeId = monsterTypeId;
-
-            spawner.StartSpawn();
+            ProgressReader.Add(reader);
         }
 
-        public LootPiece CreateLoot()
+        private void RegisterProgressWatchers(GameObject gameObject)
         {
-            LootPiece loot = _assets.Instantiate(AssetsPath.LOOT_PATH)
-                .GetComponent<LootPiece>();
-
-            loot.Construct(_progressService.Progress.WorldData);
-
-            return loot;
+            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
+                Register(progressReader);
         }
+
+        private GameObject InstantiateRegistered(string prefabPath, Vector2 at)
+        {
+            GameObject gameObject = _assets.Instantiate(prefabPath,  at);
+            RegisterProgressWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        private GameObject InstantiateRegistered(string prefabPath)
+        {
+            GameObject gameObject = _assets.Instantiate(path: prefabPath);
+            RegisterProgressWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        #endregion
     }
 }
