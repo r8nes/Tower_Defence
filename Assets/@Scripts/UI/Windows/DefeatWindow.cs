@@ -6,11 +6,9 @@ namespace Defender.UI
     public class DefeatWindow : WindowBase
     {
         public TextMeshProUGUI ScoreText;
-        public string TransferTo = "Main";
 
         protected override void OnAwake()
         {
-            // заглушка
             CloseButton.onClick.AddListener(() => _stateMachine.Enter<BootstrapState>());
             base.OnAwake();
         }
@@ -21,6 +19,6 @@ namespace Defender.UI
 
         protected override void CleanUp() => Progress.WorldData.LootData.Changed -= RefreshText;
 
-        private void RefreshText() => ScoreText.text = Progress.WorldData.LootData.Collected.ToString();
+        private void RefreshText() => ScoreText.text = $"Your score: {Progress.WorldData.LootData.Collected.ToString()}\n=3";
     }
 }

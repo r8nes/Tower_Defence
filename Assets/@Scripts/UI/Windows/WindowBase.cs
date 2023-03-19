@@ -27,6 +27,7 @@ namespace Defender.UI
             Initialize();
             SubScribeUpdates();
         }
+        
         private void OnDestroy() => CleanUp();
         protected virtual void OnAwake() => CloseButton.onClick.AddListener(() => Destroy(gameObject));
         protected virtual void Initialize() { }

@@ -7,8 +7,8 @@ namespace Defender.UI
 {
     public class ActorButton : MonoBehaviour
     {
-        public int NumberToIncrement;
         public int MaxLevelUpgrade = 4;
+        public int NumberToIncrement;
 
         public TextMeshProUGUI ParameterName;
         public PlayerAttackParameter PlayerParamter;

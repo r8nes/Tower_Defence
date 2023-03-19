@@ -23,24 +23,17 @@ namespace Defender.Service
             _progressService = progressService;
         }
 
-        public void CreateDefeatWindow()
-        {
-            WindowConfigData config = _staticData.ForWindow(WindowId.DEFEAT);
-            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
-            window.Construct(_progressService, _stateMachine);
-        }
-
-        public void CreateHackWindow()
-        {
-            WindowConfigData config = _staticData.ForWindow(WindowId.UNKNOWN);
-            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
-            window.Construct(_progressService, _stateMachine);
-        }
-
         public void CreateUIRoot()
         {
             GameObject root = _asset.Instantiate(UI_ROOT_PATH);
             _uiRoot = root.transform;
+        }
+
+        public void CreateWindowById(WindowId windowId)
+        {
+            WindowConfigData config = _staticData.ForWindow(windowId);
+            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
+            window.Construct(_progressService, _stateMachine);
         }
     }
 }
