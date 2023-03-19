@@ -1,17 +1,17 @@
-﻿using TMPro;
-using UnityEngine.SceneManagement;
+﻿using Defender.State;
+using TMPro;
 
 namespace Defender.UI
 {
     public class DefeatWindow : WindowBase
     {
         public TextMeshProUGUI ScoreText;
+        public string TransferTo = "Main";
 
         protected override void OnAwake()
         {
-            // Простая заглушка
-            SceneManager.LoadScene(0);
-
+            // заглушка
+            CloseButton.onClick.AddListener(() => _stateMachine.Enter<BootstrapState>());
             base.OnAwake();
         }
 

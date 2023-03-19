@@ -1,5 +1,6 @@
 ﻿using Defender.Data;
 using Defender.Service;
+using Defender.State;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,14 @@ namespace Defender.UI
         public Button CloseButton;
 
         protected IProgressService _progressService;
+        protected IGameStateMachine _stateMachine;
         protected PlayerProgress Progress => _progressService.Progress;
 
-        public void Construct(IProgressService progressService) => _progressService = progressService;
+        public void Construct(IProgressService progressService, IGameStateMachine stateMachine)
+        {
+            _stateMachine = stateMachine;
+            _progressService = progressService;
+        }
 
         private void Awake() => OnAwake();
 

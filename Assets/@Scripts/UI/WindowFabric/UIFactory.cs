@@ -1,4 +1,5 @@
-﻿using Defender.UI;
+﻿using Defender.State;
+using Defender.UI;
 using UnityEngine;
 
 namespace Defender.Service
@@ -10,13 +11,15 @@ namespace Defender.Service
         private readonly IAssetsProvider _asset;
         private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
+        private readonly IGameStateMachine _stateMachine;
 
         private Transform _uiRoot;
 
-        public UIFactory(IAssetsProvider asset, IStaticDataService staticData, IProgressService progressService)
+        public UIFactory(IAssetsProvider asset, IStaticDataService staticData, IProgressService progressService, IGameStateMachine stateMachine)
         {
             _asset = asset;
             _staticData = staticData;
+            _stateMachine = stateMachine;
             _progressService = progressService;
         }
 
@@ -24,14 +27,14 @@ namespace Defender.Service
         {
             WindowConfigData config = _staticData.ForWindow(WindowId.DEFEAT);
             WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
-            window.Construct(_progressService);
+            window.Construct(_progressService, _stateMachine);
         }
 
         public void CreateHackWindow()
         {
             WindowConfigData config = _staticData.ForWindow(WindowId.UNKNOWN);
             WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
-            window.Construct(_progressService);
+            window.Construct(_progressService, _stateMachine);
         }
 
         public void CreateUIRoot()

@@ -30,6 +30,7 @@ namespace Defender.State
 
         private void GloabalRegisterService()
         {
+            RegisterStateMachine();
             RegisterAssetProvider();
             RegisterStaticData();
             RegisterProgressService();
@@ -41,6 +42,11 @@ namespace Defender.State
         }
 
         #region Register
+
+        private void RegisterStateMachine() 
+        {
+            _services.RegisterSingle<IGameStateMachine>(_stateMachine);
+        }
 
         private void RegisterAssetProvider()
         {
@@ -71,7 +77,8 @@ namespace Defender.State
            new UIFactory(
            _services.Single<IAssetsProvider>(),
            _services.Single<IStaticDataService>(),
-           _services.Single<IProgressService>()
+           _services.Single<IProgressService>(),
+           _services.Single<IGameStateMachine>()
            ));
         }
 

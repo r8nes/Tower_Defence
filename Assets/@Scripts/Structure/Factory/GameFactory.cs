@@ -81,7 +81,8 @@ namespace Defender.Factory
             PlayerGameObject = InstantiateRegistered(AssetsPath.PLAYER_PATH, initialPoint);
 
             PlayerGameObject.GetComponent<PlayerAttack>().Construct(_progressService.Progress);
-            PlayerGameObject.GetComponent<PlayerHealth>().Construct(_progressService.Progress);
+            PlayerGameObject.GetComponent<PlayerHealth>().Construct(_progressService.Progress, _windowService);
+
             PlayerGameObject.GetComponentInChildren<AggroZone>().Construct(_progressService.Progress);
 
             return PlayerGameObject;

@@ -1,18 +1,22 @@
 using System;
 using Defender.Data;
+using Defender.Service;
 using UnityEngine;
 
 namespace Defender.Entity
 {
     public class PlayerHealth : MonoBehaviour, IHealth
     {
-        private PlayerHealthData _healthData;
-
         public event Action HealthChanged;
 
-        public void Construct(PlayerProgress progress) 
+        private IWindowService _windowService;
+        private PlayerHealthData _healthData;
+
+        public void Construct(PlayerProgress progress, IWindowService windowService) 
         {
+            _windowService = windowService;
             _healthData = progress.PlayerHealthData;
+            
             Current = _healthData.MaxHP;
         }
 
@@ -41,6 +45,8 @@ namespace Defender.Entity
 
             Current -= damage;
             Debug.Log($"{Max}/{Current}");
+
+            if (Current <= 0)_windowService.Open(WindowId.DEFEAT);
         }
 
         #region Unused ISaveProgress

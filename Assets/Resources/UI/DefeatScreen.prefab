@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278321666
+  m_fontColor: {r: 0.009433985, g: 0.009433985, b: 0.009433985, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -187,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 5468449294870505086}
   ScoreText: {fileID: 5468449294423646397}
+  TransferTo: Main
 --- !u!1 &5468449294713180701
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +335,8 @@ GameObject:
   - component: {fileID: 5468449294870505080}
   - component: {fileID: 5468449294870505081}
   - component: {fileID: 5468449294870505086}
+  - component: {fileID: 1768127567019890534}
+  - component: {fileID: 4033595255161310082}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -444,6 +447,40 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1768127567019890534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5468449294870505084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &4033595255161310082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5468449294870505084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07604567adb7b456a8f1e2f00c29977c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShapeSprite: {fileID: 21300000, guid: 78eda95d8ce954115ade4582b842896f, type: 3}
+  Speed: 4
+  AutomaticMaxSize: 1
+  MaxSize: 4
+  StartColor: {r: 0.63584906, g: 0.7529048, b: 1, a: 1}
+  EndColor: {r: 0.22075468, g: 0.3376293, b: 1, a: 1}
+  OnUIOnly: 1
+  RenderOnTop: 1
+  StartAtCenter: 0
 --- !u!1 &5468449296065921531
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.54901963}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
