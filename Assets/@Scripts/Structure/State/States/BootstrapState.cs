@@ -19,7 +19,7 @@ namespace Defender.State
             _sceneLoader = sceneLoader;
             _stateMachine = gameStateMachine;
 
-            RegisterService();
+            GloabalRegisterService();
         }
 
         public void Enter() => _sceneLoader.Load(INITIAL_SCENE, onLoaded: EnterLoadLevel);
@@ -28,7 +28,7 @@ namespace Defender.State
 
         private void EnterLoadLevel() => _stateMachine.Enter<LoadProgressState>();
 
-        private void RegisterService()
+        private void GloabalRegisterService()
         {
             RegisterAssetProvider();
             RegisterStaticData();

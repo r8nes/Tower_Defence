@@ -1,11 +1,12 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace Defender.Logic
 {
     public class LootPiece : MonoBehaviour
     {
-        private const float DelayBeforeDestroying = 0.2f;
+        private const float DelayBeforeDestroying = 0.7f;
 
         public TextMeshProUGUI LootText;
 
@@ -15,6 +16,7 @@ namespace Defender.Logic
         private void Start()
         {
             Pickup();
+            gameObject.transform.DOPunchPosition(transform.position + Vector3.one, 0.5f, 5);
         }
 
         public void Construct(WorldData worldData) => _worldData = worldData;
