@@ -44,7 +44,6 @@ namespace Defender.Entity
             if (Current <= 0) return;
 
             Current -= damage;
-            Debug.Log($"{Max}/{Current}");
 
             if (Current <= 0) _windowService.Open(WindowId.DEFEAT);
         }

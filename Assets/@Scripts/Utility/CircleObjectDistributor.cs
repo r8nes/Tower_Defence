@@ -25,7 +25,9 @@ namespace Defender.Utility
 
             for (int i = 0; i < Objects.Count; i++)
             {
-                Vector2 objectPosition = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad)) * Radius;
+                Vector2 objectPosition = new Vector2(
+                    Mathf.Cos(currentAngle * Mathf.Deg2Rad),
+                    Mathf.Sin(currentAngle * Mathf.Deg2Rad)) * Radius;
                 Objects[i].position = (Vector2)transform.position + objectPosition;
                 currentAngle += angle;
             }

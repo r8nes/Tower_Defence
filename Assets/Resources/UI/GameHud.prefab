@@ -246,8 +246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 179, y: 0}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 234, y: 0}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7551052839107118056
 CanvasRenderer:
@@ -1984,6 +1984,7 @@ GameObject:
   - component: {fileID: 1526227164137758165}
   - component: {fileID: 1526227164137758164}
   - component: {fileID: 2140306119783610854}
+  - component: {fileID: 7007300010448892785}
   m_Layer: 5
   m_Name: GameHud
   m_TagString: Untagged
@@ -2088,6 +2089,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 5935584010463852311}
+--- !u!114 &7007300010448892785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526227164137758167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a9b83f930bce741b589b96f398900f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnBar: {fileID: 8856431542321491331}
 --- !u!1 &1585734143280668937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,6 +2505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8915631190017391058}
+  - component: {fileID: 8856431542321491331}
   m_Layer: 5
   m_Name: 'SpawnBar '
   m_TagString: Untagged
@@ -2520,6 +2535,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 65}
   m_SizeDelta: {x: -45, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8856431542321491331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5315708614395036138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb06ea64d1f4c93478cd5f0f64d088ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 6852585124390327071}
+  EnemiesCount: {fileID: 3046896844646547247}
+  WaveText: {fileID: 2451405185564091513}
 --- !u!1 &6047129664857969768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2721,7 +2751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 349f442d69e002d4c8828690023f6d0d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7b1ca34c7345fa64b88753c15db3f4ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

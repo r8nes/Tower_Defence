@@ -39,7 +39,7 @@ namespace Defender.State
 
             progress.PlayerDamageData.Damage = 1;
             progress.PlayerDamageData.DamageRadius = 6f;
-            progress.PlayerDamageData.BulletSpeed = 2f;
+            progress.PlayerDamageData.BulletSpeed = 3.5f;
             progress.PlayerDamageData.FireRate = 0.4f;
 
             progress.PlayerHealthData.MaxHP = 6f;

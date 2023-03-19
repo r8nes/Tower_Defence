@@ -69,29 +69,31 @@ namespace Defender.State
         {
             LevelStaticData levelData = GetLevelStaticData();
 
-            InitSpawners(levelData);
-
+            SpawnPoint spawn = InitSpawners(levelData);
             GameObject player = InitPlayer(levelData);
 
-            InitHud(player);
+            InitHud(player, spawn);
         }
 
-        private void InitSpawners(LevelStaticData levelData)
+        private SpawnPoint InitSpawners(LevelStaticData levelData)
         {
-            var spawn = _gameFactory.CreateSpawner();
+            SpawnPoint spawn = _gameFactory.CreateSpawner();
 
             foreach (SpawnerTransform spawnMarker in levelData.SpawnerTransform)
                 spawn.AddSpawnMarker(spawnMarker);
+
+            return spawn;
         }
 
-        private GameObject InitHud(GameObject player)
+        private GameObject InitHud(GameObject player, SpawnPoint spawnPoint)
         {
             GameObject hud = _gameFactory.CreateHud();
 
-            if (hud.TryGetComponent(out ActorUI actor))
-            {
-                actor.Construct(player.GetComponent<PlayerHealth>());
-            }
+            if (hud.TryGetComponent(out ActorHP actorHP))
+                actorHP.Construct(player.GetComponent<PlayerHealth>());
+
+            if (hud.TryGetComponent(out ActorSpawn actorSpawn))
+                actorSpawn.Construct(spawnPoint.GetComponent<SpawnPoint>()); ;
 
             return hud;
         }

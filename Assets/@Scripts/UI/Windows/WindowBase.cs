@@ -39,19 +39,19 @@ namespace Defender.UI
             Initialize();
             SubScribeUpdates();
         }
-        
-        private void OnDestroy() => CleanUp();
+
+        private void OnDestroy()
+        {
+            WindowClosed?.Invoke(_windowId);
+        }
         protected virtual void OnAwake()
         {
-
             CloseButton.onClick.AddListener(() => Destroy(gameObject));
         }
-
         protected virtual void Initialize() { }
         protected virtual void SubScribeUpdates() { }
         protected virtual void CleanUp() 
         {
-            WindowClosed?.Invoke(_windowId);
         }
     }
 }

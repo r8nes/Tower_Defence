@@ -1,21 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+using Defender.Logic;
 using UnityEngine;
 
-namespace Defender
+namespace Defender.UI
 {
     public class ActorSpawn : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public SpawnBar SpawnBar;
+        private SpawnPoint _spawnPoint;
+
+        private void Start()
         {
-        
+            UpdateSpawnBar(0);
+            UpdateWaveText(0);
+        }
+        private void OnDisable()
+        {
+            _spawnPoint.OnSpawnEnemiesAppeared -= UpdateSpawnBar;
+            _spawnPoint.OnWaveChanged -= UpdateWaveText;
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Construct(SpawnPoint spawnPoint)
         {
-        
+            _spawnPoint = spawnPoint;
+
+            _spawnPoint.OnSpawnEnemiesAppeared += UpdateSpawnBar;
+            _spawnPoint.OnWaveChanged += UpdateWaveText;
         }
+
+        private void UpdateSpawnBar(int count)
+        {
+            SpawnBar.SetBarValue(count, _spawnPoint.EnemiesPerWave);
+            SpawnBar.SetEnemiesTextValue(count, _spawnPoint.EnemiesPerWave);
+        }
+
+        private void UpdateWaveText(int count) => SpawnBar.SetWaveTextValue(count);
     }
 }

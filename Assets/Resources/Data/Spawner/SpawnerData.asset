@@ -15,7 +15,7 @@ MonoBehaviour:
   Config:
   - WaveCount: 5
     EnemiesPerWave: 10
-    Interval: 1
+    Interval: 7
     WaveId: Main
     MonsterTypeId: 0
     Position: {x: 0, y: 0}

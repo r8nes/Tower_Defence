@@ -55,6 +55,7 @@ namespace Defender.Service
             {
                 if (OpenWindows[i].GetId() == id)
                 {
+                    OpenWindows[i].WindowClosed -= OnWindowClosed;
                     OpenWindows.Remove(OpenWindows[i]);
                 }
             }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Defender.UI
 {
-    public class ActorUI : MonoBehaviour
+    public class ActorHP : MonoBehaviour
     {
         [Header("HPBar")]
         public HpBar HpBar;
@@ -16,7 +16,11 @@ namespace Defender.UI
 
             if (health != null)
                 Construct(health);
+
+            UpdateHpBar();
         }
+
+        private void OnDisable() => _health.HealthChanged -= UpdateHpBar;
 
         public void Construct(IHealth health)
         {
@@ -26,7 +30,7 @@ namespace Defender.UI
 
         private void UpdateHpBar()
         {
-            HpBar.SetValue(_health.Current, _health.Max);
+            HpBar.SetBarValue(_health.Current, _health.Max);
             HpBar.SetTextValue(_health.Current, _health.Max);
         }
     }
