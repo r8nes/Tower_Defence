@@ -20,9 +20,10 @@ namespace Defender.UI
         public void Construct(PlayerProgress progress)
         {
             _playerProgress = progress.PlayerDamageData;
-            ParameterName.text = _playerProgress.GetParameter(PlayerParamter).ToString();
+            SetStatText();
         }
-
+        
+        //EventBus
         public void UpgradeProgress()
         {
             if (_currentUpgrade <= MaxLevelUpgrade)
@@ -34,6 +35,11 @@ namespace Defender.UI
 
                 _currentUpgrade++;
             }
+        }
+        
+        private void SetStatText()
+        {
+            ParameterName.text = _playerProgress.GetParameter(PlayerParamter).ToString();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Defender.Factory
     {
         private readonly IRandomService _random;
         private readonly IAssetsProvider _assets;
+        private readonly IWindowService _windowService;
         private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
 
@@ -22,11 +23,12 @@ namespace Defender.Factory
         public List<ISavedProgressReader> ProgressReader => new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters => new List<ISavedProgress>();
 
-        public GameFactory(IAssetsProvider assets, IStaticDataService staticData, IRandomService random, IProgressService progressService)
+        public GameFactory(IAssetsProvider assets, IStaticDataService staticData, IRandomService random, IProgressService progressService, IWindowService windowService)
         {
             _assets = assets;
-            _staticData = staticData;
             _random = random;
+            _staticData = staticData;
+            _windowService = windowService;
             _progressService = progressService;
         }
 
@@ -55,10 +57,12 @@ namespace Defender.Factory
             GameObject hud = InstantiateRegistered(AssetsPath.GLOBAL_HUD_PATH);
 
             hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
-            ActorButton[] actorButtons = hud.GetComponentsInChildren<ActorButton>();
 
-            for (int i = 0; i < actorButtons.Length; i++)
-                actorButtons[i].Construct(_progressService.Progress);
+            foreach (ActorButton button in hud.GetComponentsInChildren<ActorButton>())
+                button.Construct(_progressService.Progress);
+
+            foreach (OpenWindowButton window in hud.GetComponentsInChildren<OpenWindowButton>())
+                window.Construct(_windowService); 
 
             return hud;
         }

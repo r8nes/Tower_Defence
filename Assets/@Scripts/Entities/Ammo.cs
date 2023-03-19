@@ -12,10 +12,7 @@ namespace Defender.Entity
 
         private GameObject _enemyGameObject;
 
-        private void Start()
-        {
-            _distance = Vector2.Distance(_startPosition, _enemyGameObject.transform.position);
-        }
+        private void Start() => _distance = Vector2.Distance(_startPosition, _enemyGameObject.transform.position);
 
         private void Update()
         {
@@ -25,13 +22,9 @@ namespace Defender.Entity
         private void MoveAmmo()
         {
             if (_enemyGameObject != null)
-            {
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, _enemyGameObject.transform.position, Time.deltaTime * _speed / _distance);
-            }
             else
-            {
                 Destroy(gameObject);
-            }
         }
 
         public void Construct(float speed, float damage, GameObject target)

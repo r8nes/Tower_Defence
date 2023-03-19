@@ -27,7 +27,8 @@ namespace Defender.State
                 loadingUi,
                 services.Single<IGameFactory>(),
                 services.Single<IStaticDataService>(),
-                services.Single<IProgressService>()),
+                services.Single<IProgressService>(),
+                 services.Single<IUIFactory>()),
 
                 [typeof(LoadProgressState)] = new LoadProgressState(
                 this,
@@ -37,6 +38,8 @@ namespace Defender.State
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };
         }
+
+        #region State Methods
 
         public void Enter<TState>() where TState : class, IState
         {
@@ -63,5 +66,7 @@ namespace Defender.State
         }
 
         private TState GetState<TState>() where TState : class, IExitableState => _states[typeof(TState)] as TState;
+
+        #endregion
     }
 }

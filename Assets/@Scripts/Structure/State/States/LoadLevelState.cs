@@ -11,15 +11,17 @@ namespace Defender.State
 {
     public class LoadLevelState : IPayLoadState<string>
     {
+        private readonly IUIFactory _uiFactory;
         private readonly IGameFactory _gameFactory;
         private readonly IStaticDataService _dataService;
         private readonly IProgressService _progressService;
 
-        private readonly GameStateMachine _gameStateMachine;
-        private readonly SceneLoader _sceneLoader;
         private readonly LoadingUI _loadingUI;
+        private readonly SceneLoader _sceneLoader;
+        private readonly GameStateMachine _gameStateMachine;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI, IGameFactory gameFactory, IStaticDataService dataService, IProgressService progressService)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI,
+            IGameFactory gameFactory, IStaticDataService dataService, IProgressService progressService, IUIFactory uiFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -27,6 +29,7 @@ namespace Defender.State
             _gameFactory = gameFactory;
             _dataService = dataService;
             _progressService = progressService;
+            _uiFactory = uiFactory;
         }
 
         public void Enter(string sceneName)
@@ -43,6 +46,7 @@ namespace Defender.State
 
         private void OnLoaded()
         {
+            InitUIRoot();
             InitGameWrold();
             //InformProgressReaders();
 
@@ -50,6 +54,7 @@ namespace Defender.State
         }
 
         #region Initials
+        private void InitUIRoot() => _uiFactory.CreateUIRoot();
 
         private void InitGameWrold()
         {
@@ -60,6 +65,17 @@ namespace Defender.State
             GameObject player = InitPlayer(levelData);
 
             InitHud(player);
+        }
+
+        private void InitSpawners(LevelStaticData levelData)
+        {
+            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawner)
+                _gameFactory.CreateSpawner(
+                    spawnerData.Position,
+                    spawnerData.Id,
+                    spawnerData.MonsterTypeId,
+                    spawnerData.WaveCount,
+                    spawnerData.WaveDelay);
         }
 
         private GameObject InitHud(GameObject player)
@@ -74,17 +90,6 @@ namespace Defender.State
             return hud;
         }
 
-        private void InitSpawners(LevelStaticData levelData)
-        {
-            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawner)
-                _gameFactory.CreateSpawner(
-                    spawnerData.Position,
-                    spawnerData.Id,
-                    spawnerData.MonsterTypeId,
-                    spawnerData.WaveCount,
-                    spawnerData.WaveDelay);
-        }
-
         private GameObject InitPlayer(LevelStaticData levelData) => _gameFactory.CreatePlayer(levelData.InitialHeroPosition);
 
         #endregion
@@ -97,10 +102,14 @@ namespace Defender.State
             return levelData;
         }
 
+        #region NoUsed
+
         private void InformProgressReaders()
         {
             foreach (ISavedProgressReader reader in _gameFactory.ProgressReader)
                 reader.LoadProgress(_progressService.Progress);
         }
+
+        #endregion
     }
 }

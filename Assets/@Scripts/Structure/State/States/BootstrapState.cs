@@ -15,9 +15,9 @@ namespace Defender.State
 
         public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, AllServices services)
         {
-            _stateMachine = gameStateMachine;
-            _sceneLoader = sceneLoader;
             _services = services;
+            _sceneLoader = sceneLoader;
+            _stateMachine = gameStateMachine;
 
             RegisterService();
         }
@@ -34,6 +34,8 @@ namespace Defender.State
             RegisterStaticData();
             RegisterProgressService();
             RegisterRandomService();
+            RegisterUiFactory();
+            RegisterWindowService();
             RegisterGameFactory();
             RegisterSaveLoadService();
         }
@@ -52,15 +54,33 @@ namespace Defender.State
             staticData.LoadMonsters();
             _services.RegisterSingle(staticData);
         }
-        
-        private void RegisterProgressService() 
+
+        private void RegisterProgressService()
         {
             _services.RegisterSingle<IProgressService>(new ProgressService());
         }
 
-        private void RegisterRandomService() 
+        private void RegisterRandomService()
         {
             _services.RegisterSingle<IRandomService>(new RandomService());
+        }
+
+        private void RegisterUiFactory()
+        {
+            _services.RegisterSingle<IUIFactory>(
+           new UIFactory(
+           _services.Single<IAssetsProvider>(),
+           _services.Single<IStaticDataService>(),
+           _services.Single<IProgressService>()
+           ));
+        }
+
+        private void RegisterWindowService()
+        {
+            _services.RegisterSingle<IWindowService>(
+               new WindowServices(
+            _services.Single<IUIFactory>()
+            ));
         }
 
         private void RegisterGameFactory()
@@ -70,10 +90,11 @@ namespace Defender.State
                             _services.Single<IAssetsProvider>(),
                             _services.Single<IStaticDataService>(),
                             _services.Single<IRandomService>(),
-                            _services.Single<IProgressService>()));
+                            _services.Single<IProgressService>(),
+                            _services.Single<IWindowService>()));
         }
 
-        private void RegisterSaveLoadService() 
+        private void RegisterSaveLoadService()
         {
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(_services.Single<IProgressService>(),

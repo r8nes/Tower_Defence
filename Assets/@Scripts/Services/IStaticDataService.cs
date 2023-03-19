@@ -7,6 +7,7 @@ namespace Defender.Service
     {
         MonsterStaticData ForMonster(EnemyTypeId type);
         LevelStaticData ForLevel(string sceneKey);
+        WindowConfigData ForWindow(WindowId windowId);
 
         void LoadMonsters();
     }
