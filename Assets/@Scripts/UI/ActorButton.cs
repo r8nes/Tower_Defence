@@ -1,4 +1,5 @@
 using Defender.Data;
+using Defender.Utility.EventBus;
 using TMPro;
 using UnityEngine;
 
@@ -7,9 +8,12 @@ namespace Defender.UI
     public class ActorButton : MonoBehaviour
     {
         public int NumberToIncrement;
+        public int MaxLevelUpgrade = 4;
 
         public TextMeshProUGUI ParameterName;
         public PlayerAttackParameter PlayerParamter;
+
+        private int _currentUpgrade = 1;
 
         private PlayerAttackData _playerProgress;
 
@@ -21,8 +25,15 @@ namespace Defender.UI
 
         public void UpgradeProgress()
         {
-            _playerProgress.SetParameter(PlayerParamter, NumberToIncrement);
-            ParameterName.text = _playerProgress.GetParameter(PlayerParamter).ToString();
+            if (_currentUpgrade <= MaxLevelUpgrade)
+            {
+                _playerProgress.SetParameter(PlayerParamter, NumberToIncrement);
+                ParameterName.text = _playerProgress.GetParameter(PlayerParamter).ToString();
+
+                EventBus.RaiseEvent<IButtonHandler>(h => h.HandleButtonData(_playerProgress));
+
+                _currentUpgrade++;
+            }
         }
     }
 }

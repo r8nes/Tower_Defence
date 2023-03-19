@@ -1,19 +1,21 @@
 using Defender.Data;
-using Defender.Service;
+using Defender.Utility.EventBus;
 using UnityEngine;
 
 namespace Defender.Entity
 {
     [RequireComponent(typeof(LineRenderer))]
-    public class AggroZone : MonoBehaviour
+    public class AggroZone : MonoBehaviour, IButtonHandler
     {
         public int Segments = 32;
 
-        public CircleCollider2D CircleCollider;
         public PlayerAttack PlayerAttack;
+        public CapsuleCollider2D CapsuleZone;
 
-        private PlayerProgress _playerProgress;
+        private float _radius;
+
         private LineRenderer _lineRenderer;
+        private PlayerProgress _playerProgress;
 
         private Color color = Color.white;
 
@@ -24,17 +26,33 @@ namespace Defender.Entity
 
         private void Start()
         {
-            var radius = _playerProgress.PlayerDamageData.DamageRadius;
-
             SetupLineRenderer();
+            DrawCircle();
+        }
+
+        private void OnEnable()
+        {
+            EventBus.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe(this);
+        }
+        
+        // EventBus
+        public void HandleButtonData(PlayerAttackData data)
+        {
+            DrawCircle();
+        }
+
+        private void DrawCircle()
+        {
+            _radius = _playerProgress.PlayerDamageData.DamageRadius;
+
             SetCirclePosition(out Vector3[] positions, out float angle, out float angleStep);
 
-            for (int i = 0; i < Segments + 1; i++)
-            {
-                positions[i] = new Vector3(radius * Mathf.Cos(angle), 0f, radius * Mathf.Sin(angle));
-                angle += angleStep;
-            }
-
+            CapsuleZone.size = new Vector2(_radius * 2, 0);
             _lineRenderer.SetPositions(positions);
         }
 
@@ -54,6 +72,12 @@ namespace Defender.Entity
             positions = new Vector3[Segments + 1];
             angle = 0f;
             angleStep = 2f * Mathf.PI / Segments;
+
+            for (int i = 0; i < Segments + 1; i++)
+            {
+                positions[i] = new Vector3(_radius * Mathf.Cos(angle), 0f, _radius * Mathf.Sin(angle));
+                angle += angleStep;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4133678389580001201}
   - component: {fileID: 4023599568059521845}
   - component: {fileID: 6206962307222876865}
-  - component: {fileID: 1161993690657264211}
+  - component: {fileID: 4321152983506561511}
   m_Layer: 0
   m_Name: AlarmCircle
   m_TagString: Untagged
@@ -146,10 +146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Segments: 32
-  CircleCollider: {fileID: 1161993690657264211}
   PlayerAttack: {fileID: -5226984144288898110}
---- !u!58 &1161993690657264211
-CircleCollider2D:
+  CapsuleZone: {fileID: 4321152983506561511}
+--- !u!70 &4321152983506561511
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -162,8 +162,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
+  m_Size: {x: 12, y: 2.0000005}
+  m_Direction: 0
 --- !u!1 &4677408884255278479
 GameObject:
   m_ObjectHideFlags: 0
