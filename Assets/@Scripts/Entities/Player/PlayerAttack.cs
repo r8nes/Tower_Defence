@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Defender.Data;
-using Defender.Utility.EventBus;
 using UnityEngine;
 
 namespace Defender.Entity

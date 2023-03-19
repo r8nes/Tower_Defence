@@ -46,7 +46,7 @@ namespace Defender.Entity
             Current -= damage;
             Debug.Log($"{Max}/{Current}");
 
-            if (Current <= 0)_windowService.Open(WindowId.DEFEAT);
+            if (Current <= 0) _windowService.Open(WindowId.DEFEAT);
         }
 
         #region Unused ISaveProgress

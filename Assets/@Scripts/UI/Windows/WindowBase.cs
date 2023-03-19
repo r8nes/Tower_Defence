@@ -1,4 +1,5 @@
-﻿using Defender.Data;
+﻿using System;
+using Defender.Data;
 using Defender.Service;
 using Defender.State;
 using UnityEngine;
@@ -10,14 +11,25 @@ namespace Defender.UI
     {
         public Button CloseButton;
 
+        protected WindowId _windowId;
+
         protected IProgressService _progressService;
         protected IGameStateMachine _stateMachine;
+
+        public event Action<WindowId> WindowClosed;
+
         protected PlayerProgress Progress => _progressService.Progress;
 
-        public void Construct(IProgressService progressService, IGameStateMachine stateMachine)
+        public void Construct(WindowId Id, IProgressService progressService, IGameStateMachine stateMachine)
         {
+            _windowId = Id;
             _stateMachine = stateMachine;
             _progressService = progressService;
+        }
+
+        public WindowId GetId() 
+        {
+            return _windowId;
         }
 
         private void Awake() => OnAwake();
@@ -29,9 +41,17 @@ namespace Defender.UI
         }
         
         private void OnDestroy() => CleanUp();
-        protected virtual void OnAwake() => CloseButton.onClick.AddListener(() => Destroy(gameObject));
+        protected virtual void OnAwake()
+        {
+
+            CloseButton.onClick.AddListener(() => Destroy(gameObject));
+        }
+
         protected virtual void Initialize() { }
         protected virtual void SubScribeUpdates() { }
-        protected virtual void CleanUp() { }
+        protected virtual void CleanUp() 
+        {
+            WindowClosed?.Invoke(_windowId);
+        }
     }
 }

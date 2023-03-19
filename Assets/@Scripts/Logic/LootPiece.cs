@@ -33,10 +33,9 @@ namespace Defender.Logic
 
         private void UpdateWorldData() => UpdateCollectedLootAmount();
 
-        private void ShowText() => LootText.text = $"{_loot.Value}";
+        private void ShowText() => LootText.text = $"${_loot.Value}";
 
         private void UpdateCollectedLootAmount() =>
          _worldData.LootData.Collect(_loot);
-
     }
 }

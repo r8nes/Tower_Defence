@@ -1,4 +1,5 @@
-﻿using Defender.State;
+﻿using System.Collections.Generic;
+using Defender.State;
 using Defender.UI;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace Defender.Service
         private readonly IGameStateMachine _stateMachine;
 
         private Transform _uiRoot;
+
+        private List<WindowBase> OpenWindows = new List<WindowBase>(2);
 
         public UIFactory(IAssetsProvider asset, IStaticDataService staticData, IProgressService progressService, IGameStateMachine stateMachine)
         {
@@ -31,9 +34,30 @@ namespace Defender.Service
 
         public void CreateWindowById(WindowId windowId)
         {
+            foreach (WindowBase openWindow in OpenWindows)
+            {
+                WindowId id = openWindow.GetId();
+                if (id == windowId) return;
+            }
+
             WindowConfigData config = _staticData.ForWindow(windowId);
-            WindowBase window = Object.Instantiate(config.Prefab, _uiRoot);
-            window.Construct(_progressService, _stateMachine);
+            WindowBase window = UnityEngine.Object.Instantiate(config.Prefab, _uiRoot);
+
+            window.Construct(windowId, _progressService, _stateMachine);
+            window.WindowClosed += OnWindowClosed;
+
+            OpenWindows.Add(window);
+        }
+
+        private void OnWindowClosed(WindowId id) 
+        {
+            for (int i = 0; i < OpenWindows.Count; i++)
+            {
+                if (OpenWindows[i].GetId() == id)
+                {
+                    OpenWindows.Remove(OpenWindows[i]);
+                }
+            }
         }
     }
 }

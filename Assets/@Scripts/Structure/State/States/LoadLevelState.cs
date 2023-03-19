@@ -23,13 +23,13 @@ namespace Defender.State
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingUI loadingUI,
             IGameFactory gameFactory, IStaticDataService dataService, IProgressService progressService, IUIFactory uiFactory)
         {
-            _gameStateMachine = gameStateMachine;
-            _sceneLoader = sceneLoader;
-            _loadingUI = loadingUI;
-            _gameFactory = gameFactory;
-            _dataService = dataService;
-            _progressService = progressService;
             _uiFactory = uiFactory;
+            _loadingUI = loadingUI;
+            _dataService = dataService;
+            _sceneLoader = sceneLoader;
+            _gameFactory = gameFactory;
+            _progressService = progressService;
+            _gameStateMachine = gameStateMachine;
         }
 
         public void Enter(string sceneName)
@@ -51,6 +51,14 @@ namespace Defender.State
             //InformProgressReaders();
 
             _gameStateMachine.Enter<GameLoopState>();
+        }
+
+        private LevelStaticData GetLevelStaticData()
+        {
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelStaticData levelData = _dataService.ForLevel(sceneKey);
+
+            return levelData;
         }
 
         #region Initials
@@ -93,14 +101,6 @@ namespace Defender.State
         private GameObject InitPlayer(LevelStaticData levelData) => _gameFactory.CreatePlayer(levelData.InitialHeroPosition);
 
         #endregion
-
-        private LevelStaticData GetLevelStaticData()
-        {
-            string sceneKey = SceneManager.GetActiveScene().name;
-            LevelStaticData levelData = _dataService.ForLevel(sceneKey);
-
-            return levelData;
-        }
 
         #region NoUsed
 
