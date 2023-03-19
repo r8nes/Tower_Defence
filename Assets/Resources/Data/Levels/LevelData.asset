@@ -15,9 +15,9 @@ MonoBehaviour:
   LevelKey: Main
   InitialHeroPosition: {x: 0, y: 0}
   SpawnerTransform:
-  - Transform: {x: 4.45, y: -0.03}
-  - Transform: {x: -4.38, y: -6.3}
-  - Transform: {x: -4.49, y: -0.06}
-  - Transform: {x: 3.96, y: 6.33}
-  - Transform: {x: 4.13, y: -6.56}
-  - Transform: {x: -4.09, y: 5.98}
+  - Transform: {x: 3.5599992, y: -6.166101}
+  - Transform: {x: -3.5600004, y: 6.1661005}
+  - Transform: {x: -3.5599992, y: -6.166101}
+  - Transform: {x: 3.5599997, y: 6.166101}
+  - Transform: {x: -7.12, y: -0.00000062245016}
+  - Transform: {x: 7.12, y: 0}
