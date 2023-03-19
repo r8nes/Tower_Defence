@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InitialPoint
   - Player Bullet
+  - Spawn Marker
   layers:
   - Default
   - TransparentFX

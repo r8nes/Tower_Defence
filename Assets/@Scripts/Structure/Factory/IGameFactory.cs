@@ -12,11 +12,11 @@ namespace Defender.Factory
         List<ISavedProgressReader> ProgressReader { get; }
 
         void Cleanup();
-        void CreateSpawner(Vector2 at, string spawnerId, EnemyTypeId monsterTypeId, int waveCount, float delay);
+        SpawnPoint CreateSpawner();
 
         GameObject CreateHud();
         LootPiece CreateLoot();
         GameObject CreatePlayer(Vector2 initialPoint);
-        GameObject CreateEnemy(EnemyTypeId typeId, Transform parent);
+        GameObject CreateEnemy(EnemyTypeId typeId, Vector2 parent);
     }
 }

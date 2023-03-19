@@ -57,7 +57,7 @@ namespace Defender.State
         private void RegisterStaticData()
         {
             IStaticDataService staticData = new StaticDataService();
-            staticData.LoadMonsters();
+            staticData.Load();
             _services.RegisterSingle(staticData);
         }
 

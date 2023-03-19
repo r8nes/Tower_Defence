@@ -1,4 +1,5 @@
 using System.Linq;
+using Defender;
 using Defender.Data.Static;
 using Defender.Logic;
 using Defender.System;
@@ -21,7 +22,8 @@ namespace Editor
 
             if (GUILayout.Button("Setup Settings"))
             {
-                levelData.EnemySpawner = FindObjectsOfType<SpawnMarker>().Select(x => new EnemySpawnerData(x.GetComponent<UniqueId>().Id, x.MonsterTypeId, x.transform.position, x.WaveCount, x.WaveDelay)).ToList();
+
+                levelData.SpawnerTransform = FindObjectsOfType<SpawnMarker>().Select(x => new SpawnerTransform(x.transform.position)).ToList();
 
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
 

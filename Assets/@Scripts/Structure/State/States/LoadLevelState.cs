@@ -1,6 +1,7 @@
 ﻿using Defender.Data.Static;
 using Defender.Entity;
 using Defender.Factory;
+using Defender.Logic;
 using Defender.Service;
 using Defender.System;
 using Defender.UI;
@@ -77,13 +78,10 @@ namespace Defender.State
 
         private void InitSpawners(LevelStaticData levelData)
         {
-            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawner)
-                _gameFactory.CreateSpawner(
-                    spawnerData.Position,
-                    spawnerData.Id,
-                    spawnerData.MonsterTypeId,
-                    spawnerData.WaveCount,
-                    spawnerData.WaveDelay);
+            var spawn = _gameFactory.CreateSpawner();
+
+            foreach (SpawnerTransform spawnMarker in levelData.SpawnerTransform)
+                spawn.AddSpawnMarker(spawnMarker);
         }
 
         private GameObject InitHud(GameObject player)

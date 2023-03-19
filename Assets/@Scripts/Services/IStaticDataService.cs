@@ -8,7 +8,8 @@ namespace Defender.Service
         MonsterStaticData ForMonster(EnemyTypeId type);
         LevelStaticData ForLevel(string sceneKey);
         WindowConfigData ForWindow(WindowId windowId);
+        EnemySpawnerData ForSpawner(string waveId);
 
-        void LoadMonsters();
+        void Load();
     }
 }

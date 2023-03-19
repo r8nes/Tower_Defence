@@ -20,9 +20,6 @@ namespace Defender.Factory
 
         private GameObject PlayerGameObject { get; set; }
 
-        public List<ISavedProgressReader> ProgressReader => new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters => new List<ISavedProgress>();
-
         public GameFactory(IAssetsProvider assets, IStaticDataService staticData, IRandomService random, IProgressService progressService, IWindowService windowService)
         {
             _assets = assets;
@@ -40,16 +37,21 @@ namespace Defender.Factory
 
         #region CreateMethods
 
-        public void CreateSpawner(Vector2 at, string spawnerId, EnemyTypeId monsterTypeId, int waveCount, float delay)
+        public SpawnPoint CreateSpawner()
         {
-            SpawnPoint spawner = InstantiateRegistered(AssetsPath.SPAWNER_PATH, at)
+            EnemySpawnerData data = _staticData.ForSpawner(_staticData.ForLevel("Main").LevelKey);
+            SpawnPoint spawner = InstantiateRegistered(AssetsPath.SPAWNER_PATH, new Vector2(0, 0))
                 .GetComponent<SpawnPoint>();
 
             spawner.Construct(this);
-            spawner.Id = spawnerId;
-            spawner.MonsterTypeId = monsterTypeId;
+            spawner.Id = data.WaveId;
 
-            spawner.StartSpawn();
+            spawner.EnemiesPerWave = data.EnemiesPerWave;
+            spawner.MonsterTypeId = data.MonsterTypeId;
+            spawner.SpawnInterval = data.Interval;
+            spawner.WaveCount = data.WaveCount;
+
+            return spawner;
         }
 
         public GameObject CreateHud()
@@ -62,7 +64,7 @@ namespace Defender.Factory
                 button.Construct(_progressService.Progress);
 
             foreach (OpenWindowButton window in hud.GetComponentsInChildren<OpenWindowButton>())
-                window.Construct(_windowService); 
+                window.Construct(_windowService);
 
             return hud;
         }
@@ -88,10 +90,10 @@ namespace Defender.Factory
             return PlayerGameObject;
         }
 
-        public GameObject CreateEnemy(EnemyTypeId typeId, Transform parent)
+        public GameObject CreateEnemy(EnemyTypeId typeId, Vector2 parent)
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
-            GameObject monster = Object.Instantiate(monsterData.Prefab, parent.position, Quaternion.identity, parent);
+            GameObject monster = Object.Instantiate(monsterData.Prefab, parent, Quaternion.identity);
 
             var health = monster.GetComponent<IHealth>();
 
@@ -113,7 +115,7 @@ namespace Defender.Factory
         /* Регистрация объектов сейчас пустует, ибо сохранять данные пока не нужно.
             Но я добавил этот сервис в прототип, если захочу с ним сделать что-то в дальнейшем */
 
-        #region RegisterMethods
+        #region NoUsed
 
         public void Register(ISavedProgressReader reader)
         {
@@ -144,6 +146,9 @@ namespace Defender.Factory
 
             return gameObject;
         }
+
+        public List<ISavedProgressReader> ProgressReader => new List<ISavedProgressReader>();
+        public List<ISavedProgress> ProgressWriters => new List<ISavedProgress>();
 
         #endregion
     }

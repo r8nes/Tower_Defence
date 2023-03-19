@@ -166,9 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b1020e3b16ee143b537c9487b9cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  WaveCount: 10
-  WaveDelay: 2.5
 --- !u!4 &256826017
 Transform:
   m_ObjectHideFlags: 0
@@ -179,7 +176,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.45, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -355,9 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b1020e3b16ee143b537c9487b9cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  WaveCount: 10
-  WaveDelay: 0.4
 --- !u!4 &750770465
 Transform:
   m_ObjectHideFlags: 0
@@ -368,7 +362,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.38, y: -6.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -416,9 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b1020e3b16ee143b537c9487b9cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  WaveCount: 10
-  WaveDelay: 0.7
 --- !u!4 &1068717280
 Transform:
   m_ObjectHideFlags: 0
@@ -429,7 +420,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.49, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -526,9 +517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b1020e3b16ee143b537c9487b9cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  WaveCount: 10
-  WaveDelay: 2
 --- !u!4 &1440513088
 Transform:
   m_ObjectHideFlags: 0
@@ -539,7 +527,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.96, y: 6.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -675,9 +663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b1020e3b16ee143b537c9487b9cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  WaveCount: 10
-  WaveDelay: 4
 --- !u!4 &1600621708
 Transform:
   m_ObjectHideFlags: 0
@@ -688,7 +673,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.13, y: -6.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -736,9 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b1020e3b16ee143b537c9487b9cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  WaveCount: 10
-  WaveDelay: 0.1
 --- !u!4 &1805176705
 Transform:
   m_ObjectHideFlags: 0
@@ -749,7 +731,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.09, y: 5.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

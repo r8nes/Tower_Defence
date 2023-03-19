@@ -27,6 +27,7 @@ namespace Defender.UI
         private void UpdateHpBar()
         {
             HpBar.SetValue(_health.Current, _health.Max);
+            HpBar.SetTextValue(_health.Current, _health.Max);
         }
     }
 }

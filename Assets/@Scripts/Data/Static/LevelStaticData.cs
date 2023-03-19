@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Defender.Logic;
 using UnityEngine;
 
 namespace Defender.Data.Static
@@ -9,6 +10,6 @@ namespace Defender.Data.Static
         public string LevelKey;
         public Vector2 InitialHeroPosition;
 
-        public List<EnemySpawnerData> EnemySpawner;
+        public List<SpawnerTransform> SpawnerTransform;
     }
 }

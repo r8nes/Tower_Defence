@@ -14,34 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Main
   InitialHeroPosition: {x: 0, y: 0}
-  EnemySpawner:
-  - Id: Main + 0c070759-58de-415f-8342-0fa520d15157
-    MonsterTypeId: 0
-    Position: {x: 4.45, y: -0.03}
-    WaveCount: 10
-    WaveDelay: 1
-  - Id: Main + ec811d3b-852a-4b20-9046-c4028e36d9d0
-    MonsterTypeId: 0
-    Position: {x: -4.38, y: -6.3}
-    WaveCount: 10
-    WaveDelay: 0.4
-  - Id: Main + 277bbc42-765f-4c6a-991b-58cf99d136de
-    MonsterTypeId: 0
-    Position: {x: -4.49, y: -0.06}
-    WaveCount: 10
-    WaveDelay: 0.7
-  - Id: Main + 505301e3-6e2f-4aba-9e8a-9377575e1732
-    MonsterTypeId: 0
-    Position: {x: 3.96, y: 6.33}
-    WaveCount: 10
-    WaveDelay: 1
-  - Id: Main + 64bcdd07-4b7d-4c49-9786-d0ddebbf5889
-    MonsterTypeId: 0
-    Position: {x: 4.13, y: -6.56}
-    WaveCount: 10
-    WaveDelay: 1
-  - Id: Main + e8ae0294-c232-415c-9d56-ed21684b1309
-    MonsterTypeId: 0
-    Position: {x: -4.09, y: 5.98}
-    WaveCount: 10
-    WaveDelay: 0.1
+  SpawnerTransform:
+  - Transform: {x: 4.45, y: -0.03}
+  - Transform: {x: -4.38, y: -6.3}
+  - Transform: {x: -4.49, y: -0.06}
+  - Transform: {x: 3.96, y: 6.33}
+  - Transform: {x: 4.13, y: -6.56}
+  - Transform: {x: -4.09, y: 5.98}
